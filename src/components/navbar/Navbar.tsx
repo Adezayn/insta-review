@@ -1,5 +1,6 @@
+import Login from "../auth/Login";
+import Signup from "../auth/Signup";
 import Container from "../global/Container";
-import { Button } from "../ui/button";
 // import DarkMode from "./DarkMode";
 // import LinksDropdown from "./LinksDropdown";
 import Logo from "./Logo";
@@ -15,8 +16,8 @@ const Navbar = () => {
         <div className="flex gap-4 items-center ">
           {/* <DarkMode />
           <LinksDropdown /> */}
-          <Button>Log In</Button>
-          <Button>Sign Up</Button>
+          <Login />
+          <Signup />
         </div>
       </Container>
     </nav>
