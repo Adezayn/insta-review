@@ -1,11 +1,17 @@
+import CategoriesSection from "@/components/home/CategoriesSection";
+import FeaturedReviews from "@/components/home/FeaturedReviews";
+import Footer from "@/components/home/Footer";
+import Hero from "@/components/home/Hero";
 
 // import { Button } from "@/components/ui/button";
 const HomePage = () => {
   return (
-    <div>
-      <h1>HomePage</h1>
-      {/* <Button variant="outline" size="lg" className="bg-red-500 text-white">Login</Button> */}
-    </div>
+    <>
+      <Hero />
+      <FeaturedReviews />
+      <CategoriesSection />
+      <Footer />
+    </>
   )
 }
 

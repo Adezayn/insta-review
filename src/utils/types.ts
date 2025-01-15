@@ -6,3 +6,13 @@ export type User = {
   instagram: string;
   productInterests: string[];
 };
+
+export type Review = {
+  id: string;
+  reviewerId: string;
+  vendorId: string;
+  description: string;
+  image: string;
+  createdAt: Date;
+  rating: string
+}
