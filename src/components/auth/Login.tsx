@@ -9,7 +9,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from '../ui/separator';
-import { signIn } from '@/utils/auth';
+import { signIn, signInWithGoogle } from '@/app/actions/auth';
+import { cn } from '@/lib/utils';
+import { toast } from '@/hooks/use-toast';
 
     const formSchema = z.object({
       email: z.string().email("Invalid email address"),
@@ -34,12 +36,44 @@ const Login = () => {
      console.log(data);
     const {result, error} =  await signIn( data.email, data.password)
      if (error) {
+         toast({
+           description: "Ooops try again 🙁",
+           className: cn(
+             "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+           ),
+         });
        return console.log(error, "===err");
      }
-
      // else successful
+      toast({
+        description: "You can login 🎉",
+        className: cn(
+          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+        ),
+      });
      console.log(result, "---res");
    });
+
+   const handleClick = async () => {
+    const { result, error } = await signInWithGoogle();
+      if (error) {
+        toast({
+          description: "Ooops try again 🙁",
+          className: cn(
+            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+          ),
+        });
+        return console.log(error, "===err");
+      }
+      // else successful
+      toast({
+        description: "You can login 🎉",
+        className: cn(
+          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+        ),
+      });
+       console.log(result, "---res");
+   }
   return (
     <DialogContainer
       title={
@@ -53,7 +87,7 @@ const Login = () => {
       button={<Button>Log In</Button>}
     >
       <div className="mb-4">
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full" onClick={handleClick}>
           <FcGoogle />
           Continue with Google
         </Button>

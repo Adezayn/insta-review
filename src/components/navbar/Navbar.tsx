@@ -1,5 +1,5 @@
 import Login from "../auth/Login";
-import Signup from "../auth/Signup";
+import { Signup } from "../auth/Signup";
 import Container from "../global/Container";
 // import DarkMode from "./DarkMode";
 // import LinksDropdown from "./LinksDropdown";

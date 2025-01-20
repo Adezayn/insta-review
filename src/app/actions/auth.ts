@@ -1,3 +1,5 @@
+import { app, database } from "@/utils/firebaseConfig";
+import { User } from "@/utils/types";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -6,8 +8,6 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { app, database } from "./firebaseConfig";
-import { User } from "./types";
 
 const auth = getAuth(app);
 
@@ -47,13 +47,19 @@ export const signUp = async (email: string, password: string) => {
   return { result, error };
 }
 
-export const saveUserDetails = async (user: User ) => {
+
+export const saveUserDetails = async (user: User) => {
   try {
     await setDoc(doc(database, "users", user.uid), {
       email: user.email,
-      name: user.fullName,
-    //   photoURL: user.photoURL,
+      name: user.name,
+      //   photoURL: user.photoURL,
       createdAt: new Date(),
+      role: user.role,
+      instagramHandle: user.instagram,
+      city: user.address.city,
+      state: user.address.state,
+      country: user.address.country
     });
     console.log("User details saved to Firestore!");
   } catch (error) {
