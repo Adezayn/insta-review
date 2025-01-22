@@ -15,5 +15,6 @@ export type Review = {
   description: string;
   image: string;
   createdAt: Date;
-  rating: string
+  rating: string;
+  name: string;
 }

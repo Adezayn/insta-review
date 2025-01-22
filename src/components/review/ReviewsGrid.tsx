@@ -1,4 +1,6 @@
+import Image from 'next/image'
 import { Review } from "@/utils/types"
+import { Card, CardContent } from '../ui/card'
 
 type Props = {
   reviews: Review[]
@@ -6,7 +8,35 @@ type Props = {
 const ReviewsGrid = ({reviews}: Props) => {
   return (
     <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {reviews.map(review => <p key={review.id}>{review.description}</p>)}
+      {reviews.map(review => {
+        const {name, image, createdAt, description, rating, reviewerId} = review
+        return (
+          <article key={reviewerId} className="group relative">
+            <Card className="transform group-hover:shadow-xl transition-shadow duration-500">
+              <CardContent className="p-4">
+                <div className="">
+                  <Image
+                    src={image}
+                    alt={name}
+                    fill
+                    sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw"
+                    priority
+                    className="rounded w-full object-cover"
+                  />
+                  <div className="mt-4 text-center">
+                    <h2 className="text-lg  capitalize">{name}</h2>
+                    <p className="text-muted-foreground  mt-2">
+                      {createdAt.toString()}
+                    </p>
+                  </div>
+                </div>
+                <p>{description}</p>
+                <div>{rating}</div>
+              </CardContent>
+            </Card>
+          </article>
+        );
+      })}
     </div>
   )
 }
