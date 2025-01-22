@@ -8,13 +8,15 @@ export type User = {
   role: string;
 };
 
-export type Review = {
+export type ReviewType = {
   id: string;
   reviewerId: string;
-  vendorId: string;
-  description: string;
   image: string;
+  name: string;
+  vendorImage: string;
+  vendorId: string;
+  vendorName: string;
+  description: string;
   createdAt: Date;
   rating: string;
-  name: string;
-}
+};

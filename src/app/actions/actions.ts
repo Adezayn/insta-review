@@ -1,6 +1,6 @@
-import { Review } from "../../utils/types";
+import { ReviewType } from "../../utils/types";
 
-export const fetchFeaturedReviews = async (): Promise<Review[]> => {
+export const fetchFeaturedReviews = async (): Promise<ReviewType[]> => {
   return [];
 };
 

@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const auth = getAuth(app);
 
@@ -66,4 +66,23 @@ export const saveUserDetails = async (user: User) => {
     console.error("Error saving user details:", error);
     throw error;
   }
+};
+
+export const getUserDetails = async (id: string) => {
+   let user = null,
+     error = null;
+  try {
+   const result = await getDoc(doc(database, "users", id));
+    console.log("User details get to Firestore!");
+    if (result.exists()) {
+      user = result.data()
+    } else{
+      user = null
+    }
+  } catch (e) {
+    console.log("Error saving user details:", e);
+     error = e;
+  }
+
+  return { user, error };
 };

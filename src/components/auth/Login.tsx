@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { DialogContainer } from '../global/Dialog';
 import { Button } from '../ui/button';
@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from '../ui/separator';
-import { signIn, signInWithGoogle } from '@/app/actions/auth';
+import { getUserDetails, signIn, signInWithGoogle } from '@/app/actions/auth';
 import { cn } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 
@@ -19,7 +19,7 @@ import { toast } from '@/hooks/use-toast';
     });
 
 const Login = () => {
-
+const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,13 +45,26 @@ const Login = () => {
        return console.log(error, "===err");
      }
      // else successful
-      toast({
-        description: "You can login 🎉",
-        className: cn(
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
-        ),
-      });
-     console.log(result, "---res");
+    if(result){
+            toast({
+              description: "You can login 🎉",
+              className: cn(
+                "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+              ),
+            });
+
+            // Fetch role from Firestore
+            const {user} = await getUserDetails(result.user.uid);
+            const role = user && user?.role;
+
+            // Redirect based on role
+            if (role === "vendor") {
+              router.push("/vendors/dashboard");
+            } else if (role === "reviewer") {
+              router.push("/reviewer/dashboard");
+            }
+            console.log(result, "---res");
+    }
    });
 
    const handleClick = async () => {

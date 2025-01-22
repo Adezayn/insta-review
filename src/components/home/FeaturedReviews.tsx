@@ -1,7 +1,7 @@
 import { fetchFeaturedReviews } from "@/app/actions/actions";
 import EmptyList from "../global/EmptyList";
 import SectionTitle from "../global/SectionTitle";
-import ReviewsGrid from "../review/ReviewsGrid";
+import FeedReviewGrid from "../review/FeedReviewGrid";
 
 const FeaturedReviews = async () => {
   const reviews = await fetchFeaturedReviews();
@@ -9,7 +9,7 @@ const FeaturedReviews = async () => {
   return (
     <section className="pt-24">
       <SectionTitle text="recent activity" />
-      <ReviewsGrid reviews={reviews} />
+      <FeedReviewGrid reviews={reviews}/>
     </section>
   );
 };
