@@ -1,18 +1,25 @@
+import Container from "@/components/global/Container";
+import LoadingContainer from "@/components/global/LoadingContainer";
 import CategoriesSection from "@/components/home/CategoriesSection";
 import FeaturedReviews from "@/components/home/FeaturedReviews";
 import Footer from "@/components/home/Footer";
 import Hero from "@/components/home/Hero";
+import Navbar from "@/components/navbar/Navbar";
+import { Suspense } from "react";
 
 // import { Button } from "@/components/ui/button";
 const HomePage = () => {
   return (
-    <>
+    <Container className="py-20">
+      <Navbar />
       <Hero />
-      <FeaturedReviews />
+      <Suspense fallback={<LoadingContainer />}>
+        <FeaturedReviews />
+      </Suspense>
       <CategoriesSection />
       <Footer />
-    </>
-  )
+    </Container>
+  );
 }
 
 export default HomePage;

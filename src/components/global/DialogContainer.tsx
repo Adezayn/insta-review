@@ -11,18 +11,18 @@ import {
 
 type Props = {
     children: React.ReactNode,
-    title: string | React.ReactNode,
-    description: string,
-    button: React.ReactNode
+    title?: string | React.ReactNode,
+    description?: string,
+    button?: React.ReactNode
 }
 export function DialogContainer({children, title, description, button}: Props) {
   return (
     <Dialog>
-      <DialogTrigger asChild>{button}</DialogTrigger>
+      {button && <DialogTrigger asChild>{button}</DialogTrigger>}
       <DialogContent className="sm:max-w-[500px] max-h-[80%] overflow-auto">
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          {title && <DialogTitle>{title}</DialogTitle>}
+          {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         {children}
         {/* <DialogFooter>

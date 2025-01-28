@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DialogContainer } from "../global/Dialog";
+import { DialogContainer } from "../global/DialogContainer";
 import ReviewerSignup from "./ReviewerSignup";
 import VendorSignup from "./VendorSignup";
 
@@ -44,4 +41,4 @@ export const Signup = () => {
       </Tabs>
     </DialogContainer>
   );
-}
+};
