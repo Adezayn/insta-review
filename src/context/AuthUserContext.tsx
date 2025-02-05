@@ -1,11 +1,16 @@
-// context/AuthUserContext.jsx
 'use client'
 import { createContext, useContext } from "react";
 import useFirebaseAuth from "@/utils/hooks/useFirebaseAuth";
+import { User } from "@/utils/types";
 
-const authUserContext = createContext({
+
+interface ContextProps {
+  authUser: User | null;
+  loading: boolean;
+}
+const authUserContext = createContext<ContextProps>({
   authUser: null,
-  loading: true,
+  loading: false,
 });
 
 export function AuthUserProvider({ children }: {children: React.ReactNode}) {

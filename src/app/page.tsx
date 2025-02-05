@@ -10,7 +10,7 @@ import { Suspense } from "react";
 // import { Button } from "@/components/ui/button";
 const HomePage = () => {
   return (
-    <Container className="py-20">
+    <Container>
       <Navbar />
       <Hero />
       <Suspense fallback={<LoadingContainer />}>

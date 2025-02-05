@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 import LoadingSpinner from "../global/LoadingSpinner";
+import { redirectToDashboard } from "@/utils/functions";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -70,11 +71,7 @@ const Login = () => {
         const role = user && user?.role;
 
         // Redirect based on role
-        if (role === "vendor") {
-          router.push("/vendors");
-        } else if (role === "reviewer") {
-          router.push("/home");
-        }
+       redirectToDashboard(role, router)
         console.log(result, "---res");
       }
     } catch (error) {
@@ -99,16 +96,23 @@ const Login = () => {
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
         ),
       });
-      return console.log(error, "===err");
     }
     // else successful
-    toast({
-      description: "You can login 🎉",
-      className: cn(
-        "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
-      ),
-    });
-    console.log(result, "---res");
+      if (result) {
+        toast({
+          description: "You can login 🎉",
+          className: cn(
+            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+          ),
+        });
+
+        // Fetch role from Firestore
+        const { user } = await getUserDetails(result.user.uid);
+        const role = user && user?.role;
+
+        // Redirect based on role
+        redirectToDashboard(role, router);
+      }
   };
   return (
     <DialogContainer

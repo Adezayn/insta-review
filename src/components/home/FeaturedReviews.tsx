@@ -4,12 +4,12 @@ import SectionTitle from "../global/SectionTitle";
 import FeedReviewGrid from "../review/FeedReviewGrid";
 
 const FeaturedReviews = async () => {
-  const reviews = await fetchFeaturedReviews();
-  if (reviews.length === 0) return <EmptyList />;
+    const { result } = await fetchFeaturedReviews();
+    if (result?.length === 0) return <EmptyList />;
   return (
     <section className="pt-24">
       <SectionTitle text="recent activity" />
-      <FeedReviewGrid reviews={reviews}/>
+      <FeedReviewGrid reviews={result}/>
     </section>
   );
 };

@@ -22,4 +22,3 @@ import { getFirestore } from "firebase/firestore";
 export const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 export const auth = getAuth(app);
 export const database = getFirestore(app);
-// const analytics = getAnalytics(app);

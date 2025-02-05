@@ -1,3 +1,4 @@
+'use client'
 import { Calendar, Home, Inbox, Bookmark, Star} from "lucide-react";
 
 import {
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import ViewProfile from "./ViewProfile";
+import { usePathname } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -43,22 +45,27 @@ const items = [
 ];
 
 export const AppSidebar = () => {
+  const pathname = usePathname();
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="pt-16">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {items.map((item) => {
+                const isActivePage = pathname === item.url;
+                const variant = isActivePage ? "outline" : "default";
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild variant={variant}>
+                      <Link href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

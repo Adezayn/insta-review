@@ -5,15 +5,13 @@ const FeedReview = ({image, vendorImage, vendorName, name, createdAt, descriptio
   return (
     <div>
       <div className="flex">
-        <Image src={image} alt={name} className="rounded" />
+        {image && <Image src={image} alt={name} className="rounded" />}
         <div>
           <p>{name} wrote a review</p>
-          <p>{createdAt.toString()}</p>
+          <p>{createdAt?.toString() ?? createdAt}</p>
         </div>
       </div>
-      <div>
-        <Image src={vendorImage} alt={name} />
-      </div>
+          {vendorImage && <Image src={vendorImage} alt={name} />}
       <div>
         <p>{vendorName}</p>
         <p>{rating}</p>
