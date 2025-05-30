@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import {
@@ -13,9 +14,10 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { saveUserDetails, signUp } from "@/app/actions/auth";
+import { saveVendorsDetails, signUp } from "@/app/actions/auth";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { redirectToDashboard } from "@/utils/functions";
 
 const formSchema = z.object({
   name: z.string().min(1, "Business name is required"),
@@ -31,6 +33,7 @@ const formSchema = z.object({
 
 
 const VendorSignup = () => {
+   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,8 +61,9 @@ const VendorSignup = () => {
             ...data,
         };
        console.log(user, "===user===");
-        await saveUserDetails(user);
+        await saveVendorsDetails(user);
         console.log(result, "---res");
+        redirectToDashboard("vendor", router)
     }
     if (error) {
           toast({

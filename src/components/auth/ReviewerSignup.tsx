@@ -85,7 +85,7 @@ const ReviewerSignup = () => {
       });
       const user = {
         uid: result.user.uid,
-        role: "reviewer",
+        role: "user",
         ...data,
       };
       console.log(user, "===user===");
@@ -214,12 +214,13 @@ const ReviewerSignup = () => {
                   <FormLabel>Instagram handle</FormLabel>
                   {/* dropdown  */}
                   <FormControl>
-                    <Input placeholder="@username" {...field} />
+                    <Input placeholder="@username" {...field} on />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+             
           </div>
           {/* <div className="mb-4">
             <FormField

@@ -1,3 +1,5 @@
+"use client"
+
 import { ReviewType } from "@/utils/types"
 import Image from "next/image";
 

@@ -48,6 +48,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       const { result, error } = await signIn(data.email, data.password);
+      console.log(result, "====result===")
       if (error) {
         toast({
           description: "Ooops try again 🙁",
@@ -108,6 +109,8 @@ const Login = () => {
 
         // Fetch role from Firestore
         const { user } = await getUserDetails(result.user.uid);
+
+        console.log(user, "===user in login component===")
         const role = user && user?.role;
 
         // Redirect based on role
@@ -127,7 +130,7 @@ const Login = () => {
       button={<Button>Log In</Button>}
     >
       {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {/* {!isLoading && ( */}
         <>
           {" "}
           <div className="mb-4">
@@ -185,7 +188,7 @@ const Login = () => {
             </form>
           </Form>
         </>
-      )}
+       {/* )} */}
     </DialogContainer>
   );
 };

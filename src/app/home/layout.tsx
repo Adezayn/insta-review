@@ -6,12 +6,19 @@
 // import { SidebarProvider } from "@/components/ui/sidebar";
 // import { useState } from "react";
 
+import { AppSidebar } from "@/components/dashboard/AppSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    // <ProtectedRoute>
-    // {children}
-    // </ProtectedRoute>
-    <div>{children}</div>
+      <div className="flex flex-col h-screen">
+        <SidebarProvider className="mt-16">
+          <AppSidebar />
+          <main className=" w-full bg-gray-50 overflow-y-auto">
+            {children}
+          </main>
+        </SidebarProvider>
+    </div>
   );
 }

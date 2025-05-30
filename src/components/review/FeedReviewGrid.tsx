@@ -1,13 +1,19 @@
+
 import { ReviewType } from "@/utils/types";
 import FeedReview from "./FeedReview";
+import EmptyList from '../global/EmptyList';
+import { fetchFeaturedReviews } from '@/app/actions/actions';
 
 type Props = {
   reviews: ReviewType[]
 }
-const FeedReviewGrid = ({ reviews }: Props) => {
-  console.log(reviews, "===reviews uyyuuy===")
+const FeedReviewGrid = async ({reviews}: Props) => {
+     const {result, error} =  await fetchFeaturedReviews();
+     console.log(result, "feedspage")
+     if (error) return <p>failed...try again</p>;
+    if (result.length === 0) return <EmptyList />;
     return( <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-       {reviews?.map((review) => {
+       {result?.map((review) => {
          return (
            <FeedReview key={review.id} {...review} />
          );

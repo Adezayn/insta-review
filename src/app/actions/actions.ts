@@ -3,6 +3,8 @@ import { database } from "@/utils/firebaseConfig";
 import { ReviewType } from "../../utils/types";
 
 export const fetchFeaturedReviews = async () => {
+  console.log("🚀 Fetching featured reviews...");
+
   let result: ReviewType[] = [], error = null;
   try {
     const postsCollectionRef = collection(database, "review");
