@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -18,6 +18,7 @@ import { saveVendorsDetails, signUp } from "@/app/actions/auth";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { redirectToDashboard } from "@/utils/functions";
+import LoadingSpinner from "../global/LoadingSpinner";
 
 const formSchema = z.object({
   name: z.string().min(1, "Business name is required"),
@@ -34,7 +35,9 @@ const formSchema = z.object({
 
 const VendorSignup = () => {
    const router = useRouter();
-  const form = useForm({
+   const userRole = "vendor"
+   const [isLoading, setIsLoading] = useState(false);
+   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -46,36 +49,44 @@ const VendorSignup = () => {
   });
 
  const onSubmit = form.handleSubmit(async (data) => {
-    const { result, error } = await signUp(data.email, data.password);
+    setIsLoading(true);
+    try{
+        const { result, error } = await signUp(data.email, data.password);
+        if(result) {
+            toast({
+                description: "You have been successfully created",
+                className: cn(
+                "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+                ),
+            });
+            const user = {
+                uid: result.user.uid,
+                role: userRole,
+                ...data,
+            };
+          console.log(user, "===user===");
+            await saveVendorsDetails(user);
+            console.log(result, "---res");
+            redirectToDashboard(userRole, router)
+        }
+        if (error) {
+            toast({
+              description: "Failed to signup",
+              className: cn(
+                "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
+              ),
+            });
+        }
+    }catch(error){
 
-    if(result) {
-        toast({
-            description: "You have been successfully created",
-            className: cn(
-            "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
-            ),
-        });
-        const user = {
-            uid: result.user.uid,
-            role: "vendor",
-            ...data,
-        };
-       console.log(user, "===user===");
-        await saveVendorsDetails(user);
-        console.log(result, "---res");
-        redirectToDashboard("vendor", router)
-    }
-    if (error) {
-          toast({
-            description: "Failed to signup",
-            className: cn(
-              "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
-            ),
-          });
+    }finally{
+      setIsLoading(false);
     }
   });
   return (
-      <Form {...form}>
+    <div>
+      {isLoading && <LoadingSpinner />}
+            <Form {...form}>
         <form onSubmit={onSubmit} className="my-2">
           <FormField
             control={form.control}
@@ -187,6 +198,7 @@ const VendorSignup = () => {
           </Button>
         </form>
       </Form>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -17,6 +17,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { saveUserDetails, signUp } from "@/app/actions/auth";
 import { cn } from "@/lib/utils";
+import LoadingSpinner from "../global/LoadingSpinner";
+import { redirectToDashboard } from "@/utils/functions";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, "Full name is required"),
@@ -61,7 +64,10 @@ const formSchema = z.object({
 // ];
 
 const ReviewerSignup = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const userRole = "user"
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -74,7 +80,9 @@ const ReviewerSignup = () => {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    const { result, error } = await signUp(data.email, data.password);
+    setIsLoading(true);
+    try{
+         const { result, error } = await signUp(data.email, data.password);
 
     if (result) {
       toast({
@@ -85,12 +93,13 @@ const ReviewerSignup = () => {
       });
       const user = {
         uid: result.user.uid,
-        role: "user",
+        role: userRole,
         ...data,
       };
       console.log(user, "===user===");
       await saveUserDetails(user);
       console.log(result, "---res");
+      redirectToDashboard(userRole, router)
     }
     if (error) {
       toast({
@@ -99,10 +108,17 @@ const ReviewerSignup = () => {
           "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4"
         ),
       });
+    } 
+    }catch(error){
+
+    } finally{
+       setIsLoading(false);
     }
   });
 
   return (
+    <div>
+     {isLoading && <LoadingSpinner />}
       <Form {...form}>
         <form onSubmit={onSubmit} className="my-2">
           {/* <div className="mb-4">
@@ -214,7 +230,7 @@ const ReviewerSignup = () => {
                   <FormLabel>Instagram handle</FormLabel>
                   {/* dropdown  */}
                   <FormControl>
-                    <Input placeholder="@username" {...field} on />
+                    <Input placeholder="@username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -280,6 +296,7 @@ const ReviewerSignup = () => {
           </Button>
         </form>
       </Form>
+    </div>
   );
 };
 

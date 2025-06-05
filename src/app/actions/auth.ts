@@ -22,7 +22,7 @@ export const signIn = async (email: string, password: string) => {
   return { result, error };
 }
 
-export const signInWithGoogle = async () => {
+export const signInWithGoogle = async (role: string) => {
   const provider = new GoogleAuthProvider();
   let result = null, error = null;
   try {
@@ -30,7 +30,7 @@ export const signInWithGoogle = async () => {
     const user = result.user;
 
     // Check if user document exists
-    const userRef = doc(database, "users", user.uid);
+    const userRef = doc(database, role, user.uid);
     const userSnap = await getDoc(userRef);
 
     if (!userSnap.exists()) {
@@ -112,11 +112,11 @@ export const saveVendorsDetails = async (user: User) => {
 
 
 
-export const getUserDetails = async (id: string) => {
+export const getUserDetails = async (id: string, role: string) => {
    let user = null,
      error = null;
   try {
-   const result = await getDoc(doc(database, "users", id));
+   const result = await getDoc(doc(database, role, id));
     console.log("User details get to Firestore!",id);
     if (result.exists()) {
       user = result.data()
