@@ -238,59 +238,7 @@ const ReviewerSignup = () => {
             />
              
           </div>
-          {/* <div className="mb-4">
-            <FormField
-              control={form.control}
-              name="productInterests"
-              render={() => (
-                <FormItem>
-                  <div className="mb-4">
-                    <FormLabel className="text-base">
-                      Product Interests
-                    </FormLabel>
-                    <FormDescription>
-                      Select the items you want purchase from your instagram
-                      vendors
-                    </FormDescription>
-                  </div>
-                  {items.map((item) => (
-                    <FormField
-                      key={item.id}
-                      control={form.control}
-                      name="productInterests"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="flex flex-row items-start space-x-3 space-y-0"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                // checked={field.value?.includes(item.id)}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(
-                                        field.value?.filter(
-                                          (value) => value !== item.id
-                                        )
-                                      );
-                                }}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-sm font-normal">
-                              {item.label}
-                            </FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
-                  ))}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div> */}
+         
           <Button type="submit" size="lg">
             Submit
           </Button>

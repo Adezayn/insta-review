@@ -10,6 +10,7 @@ import {
   FormItem,
   FormControl,
   FormMessage,
+  FormDescription,
 } from "../ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,6 +20,7 @@ import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { redirectToDashboard } from "@/utils/functions";
 import LoadingSpinner from "../global/LoadingSpinner";
+import { Checkbox } from "../ui/checkbox";
 
 const formSchema = z.object({
   name: z.string().min(1, "Business name is required"),
@@ -29,7 +31,8 @@ const formSchema = z.object({
   }),
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  instagram: z.string().optional()
+  instagram: z.string().optional(),
+  category:  z.array(z.string())
 });
 
 
@@ -44,9 +47,12 @@ const VendorSignup = () => {
       address: { city: "", state: "", country: "" },
       email: "",
       password: "",
-      instagram: ""
+      instagram: "",
+      category: []
     },
   });
+
+  const categoriesList = ['Food', 'Fashion', "Men's Wears", "Women's Wears", "Shoes", "Others"]
 
  const onSubmit = form.handleSubmit(async (data) => {
     setIsLoading(true);
@@ -97,9 +103,9 @@ const VendorSignup = () => {
                 <FormControl>
                   <Input placeholder="Business Name" {...field} />
                 </FormControl>
-                {/* <FormDescription>
+                <FormDescription>
                   This is your public display name.
-                </FormDescription> */}
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -188,6 +194,60 @@ const VendorSignup = () => {
                   <FormControl>
                     <Input placeholder="@username" {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+           <div className="mb-4">
+            <FormField
+              control={form.control}
+              name="category"
+              render={() => (
+                <FormItem>
+                  <div className="mb-4">
+                    <FormLabel className="text-base">
+                      Category
+                    </FormLabel>
+                    <FormDescription>
+                      Select the categories your business fall down
+                    </FormDescription>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    {categoriesList.map((item) => (
+                    <FormField
+                      key={item}
+                      control={form.control}
+                      name="category"
+                      render={({ field }) => {
+                        return (
+                          <FormItem
+                            key={item}
+                            className="flex flex-row items-start space-x-3 space-y-0"
+                          >
+                            <FormControl>
+                              <Checkbox
+                                // checked={field.value?.includes(item.id)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([...field.value, item])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== item
+                                        )
+                                      );
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="text-sm font-normal">
+                              {item}
+                            </FormLabel>
+                          </FormItem>
+                        );
+                      }}
+                    />
+                  ))}
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}

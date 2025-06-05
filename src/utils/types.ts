@@ -8,6 +8,10 @@ export type User = {
   role: string;
 };
 
+export type Vendor = User & {
+   category: string[]
+};
+
 export type ReviewType = {
   id: string;
   reviewerId: string;
@@ -20,3 +24,17 @@ export type ReviewType = {
   createdAt: Date;
   rating: string;
 };
+
+export type VendorType = {
+  name: string; // full name for reviewer, business name for vendors
+  address: { city: string; state: string; country: string };
+  email: string;
+  instagramHandle: string;
+  category: string[];
+  rating: 0;
+  image: string;
+  description: string;
+  id: string;
+  averageRating: number;
+
+}

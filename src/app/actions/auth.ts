@@ -1,5 +1,6 @@
 import { app, database } from "@/utils/firebaseConfig";
-import { User } from "@/utils/types";
+import { formatDate } from "@/utils/functions";
+import { User, Vendor, VendorType } from "@/utils/types";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -76,7 +77,7 @@ export const saveUserDetails = async (user: User) => {
       email: user.email,
       name: user.name,
       //   photoURL: user.photoURL,
-      createdAt: new Date(),
+      createdAt: formatDate(new Date()),
       role: user.role,
       instagramHandle: user.instagram,
       city: user.address.city,
@@ -90,18 +91,21 @@ export const saveUserDetails = async (user: User) => {
   }
 };
 
-export const saveVendorsDetails = async (user: User) => {
+export const saveVendorsDetails = async (user: Vendor) => {
   try {
     await setDoc(doc(database, "vendors", user.uid), {
       email: user.email,
       name: user.name,
       //   photoURL: user.photoURL,
-      createdAt: new Date(),
+      createdAt: formatDate(new Date()),
       role: user.role,
       instagramHandle: user.instagram,
       city: user.address.city,
       state: user.address.state,
-      country: user.address.country
+      country: user.address.country,
+      category: user.category,
+      averageRating: 0,
+      rating: 0
     });
     console.log("Vendors details saved to Firestore!");
   } catch (error) {

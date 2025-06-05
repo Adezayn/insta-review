@@ -7,9 +7,8 @@ import { fetchFeaturedReviews } from '@/app/actions/actions';
 type Props = {
   reviews: ReviewType[]
 }
-const FeedReviewGrid = async ({reviews}: Props) => {
+const FeedReviewGrid = async () => {
      const {result, error} =  await fetchFeaturedReviews();
-     console.log(result, "feedspage")
      if (error) return <p>failed...try again</p>;
     if (result.length === 0) return <EmptyList />;
     return( <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
