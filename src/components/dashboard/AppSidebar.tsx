@@ -31,12 +31,7 @@ const items = [
     title: "Inbox",
     url: "#",
     icon: Inbox,
-  },
-  {
-    title: "Ratings",
-    url: "#",
-    icon: Star,
-  },
+  }
 ];
 
 export const AppSidebar = () => {

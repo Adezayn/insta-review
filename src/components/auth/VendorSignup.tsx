@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { redirectToDashboard } from "@/utils/functions";
 import LoadingSpinner from "../global/LoadingSpinner";
 import { Checkbox } from "../ui/checkbox";
+import { categoriesList } from "@/utils/content";
 
 const formSchema = z.object({
   name: z.string().min(1, "Business name is required"),
@@ -52,7 +53,6 @@ const VendorSignup = () => {
     },
   });
 
-  const categoriesList = ['Food', 'Fashion', "Men's Wears", "Women's Wears", "Shoes", "Others"]
 
  const onSubmit = form.handleSubmit(async (data) => {
     setIsLoading(true);
@@ -216,13 +216,13 @@ const VendorSignup = () => {
                   <div className="grid grid-cols-2">
                     {categoriesList.map((item) => (
                     <FormField
-                      key={item}
+                      key={item.name}
                       control={form.control}
                       name="category"
                       render={({ field }) => {
                         return (
                           <FormItem
-                            key={item}
+                            key={item.name}
                             className="flex flex-row items-start space-x-3 space-y-0"
                           >
                             <FormControl>
@@ -240,7 +240,7 @@ const VendorSignup = () => {
                               />
                             </FormControl>
                             <FormLabel className="text-sm font-normal">
-                              {item}
+                              {item.name}
                             </FormLabel>
                           </FormItem>
                         );

@@ -16,7 +16,7 @@ const VendorCard= ({image, name, description, rating, category, averageRating, i
             <div className="mb-4"><RatingInfo rating={rating} averageRating={averageRating} /></div>
             <p className="mb-4">{description}</p>
             <div className="flex gap-4">
-              {category.map(each =><p className="py-2 px-4 bg-slate-200 rounded-full from-neutral-700 text-sm">{each}</p>)}
+              {category.map(each =><p className="py-2 px-4 bg-slate-200 rounded-full from-neutral-700 text-sm" key={each}>{each}</p>)}
             </div>
           </div>
         </div>

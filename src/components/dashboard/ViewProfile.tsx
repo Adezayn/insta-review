@@ -1,19 +1,21 @@
 import {
   Settings,
-  User2Icon
+  CircleUserRound,
+  LogOutIcon
 } from "lucide-react";
 
 const ViewProfile = () => {
   return (
     <div className="flex justify-between">
         <div className="flex gap-2">
-          <User2Icon />
+          <CircleUserRound />
           <div>
             <p>Amanda</p>
-            <p>View profile</p>
+            <p className="mb-4 mt-1">View profile</p>
           </div>
         </div>
         <Settings />
+        <LogOutIcon />
     </div>
   )
 };
