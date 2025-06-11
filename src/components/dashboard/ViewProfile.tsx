@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/redux/hooks";
 import {
   Settings,
   CircleUserRound,
@@ -5,12 +6,13 @@ import {
 } from "lucide-react";
 
 const ViewProfile = () => {
+  const {name} = useAppSelector(state => state.users);
   return (
     <div className="flex justify-between">
         <div className="flex gap-2">
           <CircleUserRound />
           <div>
-            <p>Amanda</p>
+            <p>{name}</p>
             <p className="mb-4 mt-1">View profile</p>
           </div>
         </div>

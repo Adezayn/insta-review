@@ -4,11 +4,15 @@ import { ReviewType, VendorType } from "@/utils/types"
 import Image from "next/image";
 import RatingInfo from "../global/RatingInfo";
 import Link from "next/link";
+import { useAppDispatch } from "@/redux/hooks";
+import { updateVendor } from "@/redux/vendorSlice";
 
-const VendorCard= ({image, name, description, rating, category, averageRating, id}: VendorType) => {
+const VendorCard= ({data}: {data: VendorType}) => {
+  const {image, name, description, rating, category, averageRating, id}: VendorType = data;
+  const dispatch = useAppDispatch();
   return (
     //  <Link href={`/vendors/${name}`}>
-     <Link href={`/vendors/${id}`}>
+     <Link href={`/vendors/${id}`} onClick={()=>{dispatch(updateVendor(data))}}>
         <div className="rounded-md border border-gray-300 p-4 flex flex-row justify-center text-center flex-1">
           {image && <Image src={image} alt={name} />}
           <div>

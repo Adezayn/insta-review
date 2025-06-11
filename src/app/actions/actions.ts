@@ -1,27 +1,43 @@
-import { collection, getDocs, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc, updateDoc, addDoc } from "firebase/firestore";
 import { database } from "@/utils/firebaseConfig";
-import { ReviewType, VendorType } from "../../utils/types";
+import { CreateReviewType, ReviewType, VendorType } from "../../utils/types";
 import { formatDate } from "@/utils/functions";
 
 export const fetchFeaturedReviews = async () => {
   console.log("🚀 Fetching featured reviews...");
 
   let result: ReviewType[] = [], error = null;
+
   try {
-    const postsCollectionRef = collection(database, "review");
-     const querySnapshot = await getDocs(postsCollectionRef);
+    const reviewsSnapshot = await getDocs(collection(database, "reviews"));
 
-     // Map through the documents and extract data
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-expect-error
-      result = querySnapshot.docs.map((doc) => ({
-       id: doc.id,
-       ...doc.data(),
-     }));
-       console.log("result in Reviews details:", result);
+    const reviewsData = await Promise.all(
+      reviewsSnapshot.docs.map(async (reviewDoc) => {
+        const review = reviewDoc.data() as ReviewType;
 
+        const reviewerRef = doc(database, "users", review.reviewerId);
+        const vendorRef = doc(database, "vendors", review.vendorId);
+
+        const [reviewerSnap, vendorSnap] = await Promise.all([
+          getDoc(reviewerRef),
+          getDoc(vendorRef)
+        ]);
+
+        const reviewer = reviewerSnap.exists() ? reviewerSnap.data() : {};
+        const vendor = vendorSnap.exists() ? vendorSnap.data() : {};
+
+        return {
+          ...review,
+          reviewerName: reviewer.name || 'Unknown Reviewer',
+          vendorName: vendor.name || 'Unknown Vendor'
+        };
+      })
+    );
+
+    result = reviewsData;
+    console.log("✅ Enriched Reviews:", result);
   } catch (e) {
-    console.log("Error result in Reviews details:", e);
+    console.error("❌ Error fetching enriched reviews:", e);
     error = e;
   }
 
@@ -88,14 +104,14 @@ export const updateRating = async (vendorId: string, newRating: number) => {
   }
 };
 
-export const createReview = async (review: ReviewType) => {
+export const createReview = async (review: CreateReviewType) => {
     try {
-      await setDoc(doc(database, "reviews"), {
+      await addDoc(collection(database, "reviews"), {
         createdAt: formatDate(new Date()),
-        rating: review.rating,
         reviewerId: review.reviewerId,
         vendorId: review.vendorId,
-        description: review.description
+        description: review.description,
+        rating: review.rating
       });
       console.log("Review saved to Firestore!");
     } catch (error) {

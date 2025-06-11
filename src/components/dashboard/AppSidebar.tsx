@@ -1,5 +1,4 @@
 'use client'
-import { Calendar, Home, Inbox, SquareUserRound, Star} from "lucide-react";
 
 import {
   Sidebar,
@@ -15,26 +14,9 @@ import Link from "next/link";
 import ViewProfile from "./ViewProfile";
 import { usePathname } from "next/navigation";
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/home",
-    icon: Home,
-  },
-  {
-    title: "Vendors",
-    url: "/vendors",
-    icon: SquareUserRound,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  }
-];
+// Menu item
 
-export const AppSidebar = () => {
+export const AppSidebar = ({items}) => {
   const pathname = usePathname();
   return (
     <Sidebar>

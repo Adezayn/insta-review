@@ -20,9 +20,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import { z } from 'zod';
 import LoadingSpinner from '../global/LoadingSpinner';
+import { useAppDispatch } from '@/redux/hooks';
+import { updateUser } from '@/redux/userSlice';
 
 const ReviewerLogin = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const userRole = "users"
   const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -42,11 +45,9 @@ const ReviewerLogin = () => {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    console.log(data);
     setIsLoading(true);
     try {
       const { result, error } = await signIn(data.email, data.password);
-      console.log(result, "====result===")
       if (error) {
         toast({
           description: "Ooops try again 🙁",
@@ -67,11 +68,14 @@ const ReviewerLogin = () => {
 
         // Fetch role from Firestore
         const { user } = await getUserDetails(result.user.uid, userRole);
+        const userInfo = {
+          ...user,
+          uid: result.user.uid
+        }
+        dispatch(updateUser(userInfo));
         const role = user && user?.role;
-        console.log(role, '=role of user on email login=')
         // Redirect based on role
-       redirectToDashboard(role, router)
-        console.log(result, "---res");
+       redirectToDashboard(role, router);
       }
     } catch (error) {
       console.error("Unexpected error during login:", error);
@@ -108,9 +112,13 @@ const ReviewerLogin = () => {
         // Fetch role from Firestore
         const { user } = await getUserDetails(result.user.uid, userRole);
 
-        console.log(user, "===user in login component===")
+        const userInfo = {
+          ...user,
+          uid: result.user.uid
+        }
+        dispatch(updateUser(userInfo));
+        
         const role = user && user?.role;
-        console.log(role, '=role of user on google signin=')
         // Redirect based on role
         redirectToDashboard(role, router);
       }

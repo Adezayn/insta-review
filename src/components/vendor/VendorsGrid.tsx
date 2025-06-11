@@ -11,7 +11,7 @@ const VendorsGrid = async () => {
   return( <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
        {result?.map((data) => {
          return (
-           <VendorCard key={data.id} {...data} />
+           <VendorCard key={data.id} data={data} />
          );
        })}
      </div>

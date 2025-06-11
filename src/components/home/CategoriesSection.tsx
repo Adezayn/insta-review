@@ -2,17 +2,18 @@
 import { categoriesList } from "@/utils/content"
 import { IconType } from "react-icons/lib";
 import IconContainer from "../global/IconContainer";
+import SectionTitle from "../global/SectionTitle";
 
 
 const CategoriesSection = () => {
   return (
-    <div className="flex flex-col items-center">
-       <h2 className="max-w-2xl font-bold text-4xl tracking-tight sm:text-3xl mb-8">Categories</h2>
-       <div className="flex flex-wrap justify-center gap-6">
+    <div className="mt-20">
+       <SectionTitle text="categories" />
+       <div className="flex flex-wrap justify-between gap-4 mt-10">
          {categoriesList.map(item => {
         const {name, icon} = item;
         return (
-           <div key={name} className="flex flex-col justify-center items-center border rounded p-12 w-1/4 hover:shadow-lg">
+           <div key={name} className="flex flex-col justify-center items-center border rounded p-12 w-1/5 hover:shadow-lg">
              <div className="mb-4">
                <IconContainer icon={icon} size={36}/>
              </div>

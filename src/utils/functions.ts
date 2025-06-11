@@ -2,7 +2,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 
 export const redirectToDashboard = (role: string, router: AppRouterInstance) => {
   if (role === "vendor") {
-    router.push("/vendors");
+    router.push("/business");
   } else if (role === "user") {
     router.push("/home");
   } else {
