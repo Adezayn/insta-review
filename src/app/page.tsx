@@ -1,3 +1,6 @@
+import AverageReviewOverTimeCard from "@/components/business/AverageRatingOverTimeCard";
+import Metrics from "@/components/business/Metrics";
+import ReviewsOverTimeCard from "@/components/business/ReviewsOverTimeCard";
 import Container from "@/components/global/Container";
 import LoadingContainer from "@/components/global/LoadingContainer";
 import CategoriesSection from "@/components/home/CategoriesSection";
@@ -18,6 +21,11 @@ const HomePage = () => {
       </Suspense>
       <CategoriesSection />
       <Footer />
+         {/* <Metrics />
+          <div className="flex gap-8">
+             <ReviewsOverTimeCard />
+             <AverageReviewOverTimeCard />
+          </div> */}
     </Container>
   );
 }

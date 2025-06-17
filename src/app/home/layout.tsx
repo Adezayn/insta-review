@@ -19,15 +19,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     title: "Vendors",
     url: "/vendors",
     icon: SquareUserRound,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
   }
 ];
   return (
-      <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen">
         <SidebarProvider className="">
           <AppSidebar items={items}/>
           <main className="w-full bg-gray-50 overflow-y-auto">

@@ -3,6 +3,7 @@ import { GiClothes, GiSonicShoes, GiLipstick  } from "react-icons/gi";
 import { MdOutlineRealEstateAgent, MdEventAvailable } from "react-icons/md";
 import { FaFemale, FaEllipsisV } from "react-icons/fa";
 
+
 export const categoriesList = [
     { name: 'Food', icon: IoFastFoodOutline}, 
     // { name:'Fashion', icon: IoFastFoodOutline}, 
