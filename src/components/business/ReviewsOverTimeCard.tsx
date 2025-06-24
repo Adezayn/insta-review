@@ -48,7 +48,7 @@ const chartConfig = {
 
 const ReviewsOverTimeCard = () => {
   return (
-    <Card className="w-1/2">
+    <Card className="md:w-1/2">
       <CardHeader>
         <CardTitle>Review Volume</CardTitle>
         <CardDescription>January - June 2024</CardDescription>

@@ -38,7 +38,7 @@ const chartConfig = {
 
 const AverageRatingOverTimeCard = () => {
   return (
-    <Card className="w-1/2">
+    <Card className="md:w-1/2">
       <CardHeader>
         <CardTitle>Average Rating - Dots</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
