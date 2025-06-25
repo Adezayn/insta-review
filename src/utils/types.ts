@@ -30,6 +30,7 @@ export type CreateReviewType = {
   vendorId: string;
   description: string;
   rating: number;
+  imageUrl?: string
 };
 
 export type VendorType = {

@@ -7,7 +7,7 @@ import SectionTitle from "../global/SectionTitle";
 
 const CategoriesSection = () => {
   return (
-    <div className="mt-20">
+    <div className="my-20">
        <SectionTitle text="categories" />
        <div className="flex flex-wrap justify-between gap-4 mt-10">
          {categoriesList.map(item => {

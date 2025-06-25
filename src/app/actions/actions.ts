@@ -111,7 +111,8 @@ export const createReview = async (review: CreateReviewType) => {
         reviewerId: review.reviewerId,
         vendorId: review.vendorId,
         description: review.description,
-        rating: review.rating
+        rating: review.rating,
+        imageUrl: review?.imageUrl
       });
       console.log("Review saved to Firestore!");
     } catch (error) {

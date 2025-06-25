@@ -14,18 +14,18 @@ import { Suspense } from "react";
 const HomePage = () => {
   return (
     <Container>
-      {/* <Navbar />
+      <Navbar />
       <Hero />
       <Suspense fallback={<LoadingContainer />}>
         <FeaturedReviews />
       </Suspense>
       <CategoriesSection />
-      <Footer /> */}
-         <Metrics />
+      {/* <Footer /> */}
+         {/* <Metrics />
           <div className="flex flex-col md:flex-row gap-8">
              <ReviewsOverTimeCard />
              <AverageReviewOverTimeCard />
-          </div>
+          </div> */}
     </Container>
   );
 }

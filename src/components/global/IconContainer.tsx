@@ -3,7 +3,7 @@ import { IconType } from "react-icons";
 interface IconStar {
   icon: IconType;
   size?: number;
-  color: string
+  color?: string
 }
 const IconContainer: React.FC<IconStar> = ({ icon: Icon, size, color }) => {
   return (
