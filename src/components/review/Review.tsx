@@ -3,7 +3,7 @@ import { Card, CardContent } from '../ui/card';
 
 import { ReviewType } from '@/utils/types';
 
-const Review = ({image, name, createdAt, description, rating}: ReviewType) => {
+const Review = ({image, reviewerName, vendorName, createdAt, description, rating}: ReviewType) => {
   return (
     <article className="group relative">
       <Card className="transform group-hover:shadow-xl transition-shadow duration-500">
@@ -11,14 +11,14 @@ const Review = ({image, name, createdAt, description, rating}: ReviewType) => {
           <div className="">
             <Image
               src={image}
-              alt={name}
+              alt={vendorName}
               fill
               sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw"
               priority
               className="rounded w-full object-cover"
             />
             <div className="mt-4 text-center">
-              <h2 className="text-lg  capitalize">{name}</h2>
+              <h2 className="text-lg  capitalize">{reviewerName}</h2>
               <p className="text-muted-foreground  mt-2">
                 {createdAt.toString()}
               </p>

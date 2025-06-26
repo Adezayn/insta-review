@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaStar } from "react-icons/fa";
 
-const ClickableRating = ({handleClick}) => {
+const ClickableRating = ({handleClick}: {handleClick: (e:number)=>void}) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number>(0);
 
