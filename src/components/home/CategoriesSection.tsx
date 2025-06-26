@@ -13,11 +13,11 @@ const CategoriesSection = () => {
          {categoriesList.map(item => {
         const {name, icon} = item;
         return (
-           <div key={name} className="flex flex-col justify-center items-center border rounded p-12 w-1/5 hover:shadow-lg">
+           <div key={name} className="flex flex-col justify-center items-center border rounded p-12 w-full sm:w-1/5 hover:shadow-lg">
              <div className="mb-4">
                <IconContainer icon={icon} size={36}/>
              </div>
-             <p className="text-lg">{name}</p>
+             <p className="text-lg text-center">{name}</p>
            </div>
         )
        })}

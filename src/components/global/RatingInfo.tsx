@@ -4,7 +4,7 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 type RateType = {
   averageRating: number
 };
-const Rate:React.FC<RateType>= ({averageRating}) => {
+ export const Rate:React.FC<RateType>= ({averageRating}) => {
  const fullRating = 5
 
   return (

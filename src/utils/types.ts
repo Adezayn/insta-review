@@ -22,7 +22,7 @@ export type ReviewType = {
   vendorName: string;
   description: string;
   createdAt: Date;
-  rating: string;
+  rating: number;
 };
 
 export type CreateReviewType = {
