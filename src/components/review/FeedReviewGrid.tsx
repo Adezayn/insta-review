@@ -10,7 +10,7 @@ const FeedReviewGrid = async () => {
     return( <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
        {result?.map((review) => {
          return (
-           <FeedReview key={review.id} {...review} />
+           <FeedReview key={review.vendorId} {...review} />
          );
        })}
      </div>

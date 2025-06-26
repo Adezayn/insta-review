@@ -55,6 +55,7 @@ const VendorSignup = () => {
 
 
  const onSubmit = form.handleSubmit(async (data) => {
+  console.log(data.category, "==data.category==")
     setIsLoading(true);
     try{
         const { result, error } = await signUp(data.email, data.password);
@@ -230,10 +231,10 @@ const VendorSignup = () => {
                                 // checked={field.value?.includes(item.id)}
                                 onCheckedChange={(checked) => {
                                   return checked
-                                    ? field.onChange([...field.value, item])
+                                    ? field.onChange([...field.value, item.name])
                                     : field.onChange(
                                         field.value?.filter(
-                                          (value) => value !== item
+                                          (value) => value !== item.name
                                         )
                                       );
                                 }}
