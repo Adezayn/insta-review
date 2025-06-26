@@ -13,10 +13,20 @@ import {
 import Link from "next/link";
 import ViewProfile from "./ViewProfile";
 import { usePathname } from "next/navigation";
+import { LucideIcon } from "lucide-react";
 
 // Menu item
+type ItemType =   {
+    title: string,
+    url: string,
+    icon: LucideIcon,
+};
 
-export const AppSidebar = ({items}) => {
+type PropType = {
+  items: ItemType[]
+}
+
+export const AppSidebar:React.FC<PropType> = ({items}) => {
   const pathname = usePathname();
   return (
     <Sidebar>
@@ -27,11 +37,12 @@ export const AppSidebar = ({items}) => {
               {items.map((item) => {
                 const isActivePage = pathname === item.url;
                 const variant = isActivePage ? "outline" : "default";
+                const Icon = item.icon; 
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild variant={variant}>
                       <Link href={item.url}>
-                        <item.icon />
+                        <Icon />
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>

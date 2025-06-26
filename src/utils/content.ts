@@ -1,7 +1,7 @@
 import { IoFastFoodOutline, IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { GiClothes, GiSonicShoes, GiLipstick  } from "react-icons/gi";
 import { MdOutlineRealEstateAgent, MdEventAvailable } from "react-icons/md";
-import { FaFemale, FaEllipsisV } from "react-icons/fa";
+import { FaFemale } from "react-icons/fa";
 
 
 export const categoriesList = [

@@ -1,5 +1,3 @@
-import { fetchFeaturedReviews } from "@/app/actions/actions";
-import EmptyList from "../global/EmptyList";
 import SectionTitle from "../global/SectionTitle";
 import FeedReviewGrid from "../review/FeedReviewGrid";
 

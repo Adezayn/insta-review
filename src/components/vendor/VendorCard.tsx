@@ -1,6 +1,6 @@
 "use client"
 
-import { ReviewType, VendorType } from "@/utils/types"
+import { VendorType } from "@/utils/types"
 import Image from "next/image";
 import RatingInfo from "../global/RatingInfo";
 import Link from "next/link";

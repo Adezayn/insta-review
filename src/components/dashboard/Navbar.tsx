@@ -1,10 +1,7 @@
 'use client'
-import { cn } from "@/lib/utils";
 import Logo from "../navbar/Logo"
-import { Button } from "../ui/button";
 import NavSearch from "./NavSearch"
 import Notification from "./Notification"
-import Link from "next/link";
 
 
 const Navbar = () => {

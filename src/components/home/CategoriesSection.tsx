@@ -1,6 +1,5 @@
 'use client'
 import { categoriesList } from "@/utils/content"
-import { IconType } from "react-icons/lib";
 import IconContainer from "../global/IconContainer";
 import SectionTitle from "../global/SectionTitle";
 

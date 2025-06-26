@@ -1,30 +1,39 @@
-// lib/useFirebaseAuth.jsx
+// lib/useFirebaseAuth.ts
 import { useState, useEffect } from "react";
 import { auth } from "../firebaseConfig";
 
-import { onAuthStateChanged as _onAuthStateChanged, NextOrObserver, User } from "firebase/auth";
+import {
+  onAuthStateChanged as _onAuthStateChanged,
+  NextOrObserver,
+  User,
+} from "firebase/auth";
 
-const formatAuthUser = (user: { uid: string; email: string; }) => ({
+export type FormattedUser = {
+  uid: string;
+  email: string | null;
+  role?: string
+};
+
+const formatAuthUser = (user: User): FormattedUser => ({
   uid: user.uid,
   email: user.email,
 });
 
 export default function useFirebaseAuth() {
-  const [authUser, setAuthUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [authUser, setAuthUser] = useState<FormattedUser | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const authStateChanged = async (authState: any) => {
+  const authStateChanged = async (authState: User | null) => {
+    setLoading(true);
+
     if (!authState) {
+      setAuthUser(null);
       setLoading(false);
       return;
     }
 
-    setLoading(true);
-
-    var formattedUser = formatAuthUser(authState);
-
+    const formattedUser = formatAuthUser(authState);
     setAuthUser(formattedUser);
-
     setLoading(false);
   };
 

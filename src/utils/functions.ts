@@ -21,13 +21,13 @@ export const formatDate = (dateString: string | Date) => {
     const month = date.toLocaleString('default', { month: 'long' });
     const year = date.getFullYear();
 
-    const time = date
-      .toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      })
-      .toUpperCase();
+    // const time = date
+    //   .toLocaleTimeString('en-US', {
+    //     hour: 'numeric',
+    //     minute: 'numeric',
+    //     hour12: true,
+    //   })
+    //   .toUpperCase();
 
     // return `${day}/${month}/${year} at ${time}`;
     return `${day}/${month}/${year}`;

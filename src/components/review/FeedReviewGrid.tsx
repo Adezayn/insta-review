@@ -1,12 +1,8 @@
 
-import { ReviewType } from "@/utils/types";
 import FeedReview from "./FeedReview";
 import EmptyList from '../global/EmptyList';
 import { fetchFeaturedReviews } from '@/app/actions/actions';
 
-type Props = {
-  reviews: ReviewType[]
-}
 const FeedReviewGrid = async () => {
      const {result, error} =  await fetchFeaturedReviews();
      if (error) return <p>failed...try again</p>;

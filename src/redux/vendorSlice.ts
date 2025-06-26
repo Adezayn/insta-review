@@ -1,4 +1,4 @@
-import { User, Vendor, VendorType } from "@/utils/types";
+import { VendorType } from "@/utils/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 

@@ -1,11 +1,11 @@
 'use client'
 import { createContext, useContext } from "react";
-import useFirebaseAuth from "@/utils/hooks/useFirebaseAuth";
+import useFirebaseAuth, { FormattedUser } from "@/utils/hooks/useFirebaseAuth";
 import { User } from "@/utils/types";
 
 
 interface ContextProps {
-  authUser: User | null;
+  authUser: FormattedUser | null;
   loading: boolean;
 }
 const authUserContext = createContext<ContextProps>({

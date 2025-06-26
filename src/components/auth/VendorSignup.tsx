@@ -84,7 +84,7 @@ const VendorSignup = () => {
             });
         }
     }catch(error){
-
+        
     }finally{
       setIsLoading(false);
     }
