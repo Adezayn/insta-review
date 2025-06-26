@@ -110,7 +110,7 @@ const ReviewerSignup = () => {
       });
     } 
     }catch(error){
-
+        console.log(error, "===catch error===");
     } finally{
        setIsLoading(false);
     }

@@ -3,7 +3,6 @@ import { FilterInput } from "@/components/global/FilterInput";
 import LoadingContainer from "@/components/global/LoadingContainer";
 import { Input } from "@/components/ui/input";
 import VendorsGrid from "@/components/vendor/VendorsGrid";
-import { categoriesList } from "@/utils/content";
 import { Suspense } from "react";
 
 

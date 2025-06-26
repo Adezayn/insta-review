@@ -28,12 +28,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReduxProvider>
-       <body
+          <AuthUserProvider>
+            <body
               className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
               {children}
               <Toaster />
             </body>
+          </AuthUserProvider>
       </ReduxProvider>
     </html>
   );

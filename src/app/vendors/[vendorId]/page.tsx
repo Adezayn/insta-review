@@ -1,6 +1,6 @@
 "use client"
 import { createReview, updateRating } from '@/app/actions/actions';
-import { uploadFileToDb } from '@/app/actions/storage';
+// import { uploadFileToDb } from '@/app/actions/storage';
 import ClickableRating from '@/components/global/ClickableRating';
 import FileUploader from '@/components/global/FileUploader';
 import { Button } from '@/components/ui/button';
@@ -21,7 +21,7 @@ const VendorDetails = () => {
    let urlVal;
     try{
       if(file){
-        const result = await uploadFileToDb(file, uid);
+        // const result = await uploadFileToDb(file, uid);
         // let {url} = result;
         //  urlVal = url
       }
