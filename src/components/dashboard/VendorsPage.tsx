@@ -8,7 +8,7 @@ const VendorsPage = async () => {
   return (
     <section className="pt-24">
       {/* <SectionTitle text="recent activity" /> */}
-      <FeedReviewGrid reviews={result} />
+      <FeedReviewGrid />
     </section>
   );
 };
