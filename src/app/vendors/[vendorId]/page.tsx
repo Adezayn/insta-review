@@ -6,7 +6,6 @@ import FileUploader from '@/components/global/FileUploader';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useAppSelector } from '@/redux/hooks';
-import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 const VendorDetails = () => {
@@ -23,8 +22,8 @@ const VendorDetails = () => {
     try{
       if(file){
         const result = await uploadFileToDb(file, uid);
-        let {url} = result;
-         urlVal = url
+        // let {url} = result;
+        //  urlVal = url
       }
       const reviewPayload = {
           description: review,

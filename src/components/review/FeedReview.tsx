@@ -9,7 +9,7 @@ const FeedReview = ({image, vendorImage, vendorName, reviewerName, createdAt, de
   return (
     <div className="border border-gray-200 p-4 shadow-sm rounded-sm">
       <div className="flex items-center gap-2 border-b border-b-gray-200 pb-3">
-        {image ? <Image src={image} alt={reviewerName} className="rounded" /> : <Image src={UserPng} alt="avatar" className="" width={40} height={40} />}
+        {image ? <Image src={image} alt={reviewerName} className="rounded" /> : <Image src={UserPng} alt="avatar" className="" width={40} height={40} unoptimized/>}
         <div>
           <p className="font-semibold text-sm mb-1">{reviewerName} wrote a review</p>
           <p className="text-xs">{createdAt?.toString() ?? createdAt}</p>

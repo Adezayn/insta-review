@@ -1,12 +1,12 @@
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 
 const storage = getStorage();
-const db = getFirestore();
+// const db = getFirestore();
 
 export const uploadFileToDb = async (file: File, userId: string) => {
   try {
-    const timestamp = Date.now();
+    // const timestamp = Date.now();
     const fileRef = ref(storage, `uploads/${userId}/${file.name}`);
     console.log("===fileRef===:", fileRef);
     // Upload file to Firebase Storage

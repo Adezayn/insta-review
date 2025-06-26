@@ -1,6 +1,6 @@
 import { app, database } from "@/utils/firebaseConfig";
 import { formatDate } from "@/utils/functions";
-import { User, Vendor, VendorType } from "@/utils/types";
+import { User, Vendor } from "@/utils/types";
 import {
   createUserWithEmailAndPassword,
   getAuth,

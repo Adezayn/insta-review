@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, getDoc, setDoc, updateDoc, addDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, updateDoc, addDoc } from "firebase/firestore";
 import { database } from "@/utils/firebaseConfig";
 import { CreateReviewType, ReviewType, VendorType } from "../../utils/types";
 import { formatDate } from "@/utils/functions";

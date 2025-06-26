@@ -1,8 +1,7 @@
 'use client'
 //import ProtectedRoute from "@/components/auth/ProtectedRoute";
 // import { AppSidebar } from "@/components/dashboard/AppSidebar";
-import Navbar from "@/components/dashboard/Navbar";
-import { Home, Inbox, SquareUserRound } from "lucide-react";
+import { Home, SquareUserRound } from "lucide-react";
 
 import { AppSidebar } from "@/components/dashboard/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
