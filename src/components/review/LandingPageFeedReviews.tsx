@@ -1,10 +1,10 @@
 
 import FeedReview from "./FeedReview";
 import EmptyList from '../global/EmptyList';
-import { fetchFeaturedReviews } from '@/app/actions/actions';
+import { fetchFeaturedReviews, fetchLatestSixFeaturedReviews } from '@/app/actions/actions';
 
-const FeedReviewGrid = async () => {
-     const {result, error} =  await fetchFeaturedReviews();
+const LandingPageFeedReviews = async () => {
+     const {result, error} =  await fetchLatestSixFeaturedReviews();
      if (error) return <p>failed...try again</p>;
     if (result.length === 0) return <EmptyList />;
     return( <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -17,4 +17,4 @@ const FeedReviewGrid = async () => {
     );
 };
 
-export default FeedReviewGrid
+export default LandingPageFeedReviews;

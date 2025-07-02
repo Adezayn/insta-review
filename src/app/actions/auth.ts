@@ -1,5 +1,4 @@
 import { app, database } from "@/utils/firebaseConfig";
-import { formatDate } from "@/utils/functions";
 import { User, Vendor } from "@/utils/types";
 import {
   createUserWithEmailAndPassword,
@@ -77,7 +76,7 @@ export const saveUserDetails = async (user: User) => {
       email: user.email,
       name: user.name,
       //   photoURL: user.photoURL,
-      createdAt: formatDate(new Date()),
+      createdAt: new Date(),
       role: user.role,
       instagramHandle: user.instagram,
       city: user.address.city,
@@ -97,7 +96,7 @@ export const saveVendorsDetails = async (user: Vendor) => {
       email: user.email,
       name: user.name,
       //   photoURL: user.photoURL,
-      createdAt: formatDate(new Date()),
+      createdAt: new Date(),
       role: user.role,
       instagramHandle: user.instagram,
       city: user.address.city,

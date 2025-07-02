@@ -4,6 +4,7 @@ import { ReviewType } from "@/utils/types"
 import UserPng from "@/assets/images/user.png"
 import Image from "next/image";
 import { Rate } from "../global/RatingInfo";
+import { formatDate } from "@/utils/functions";
 
 const FeedReview = ({image, vendorImage, vendorName, reviewerName, createdAt, description, rating}: ReviewType) => {
   return (
@@ -12,7 +13,7 @@ const FeedReview = ({image, vendorImage, vendorName, reviewerName, createdAt, de
         {image ? <Image src={image} alt={reviewerName} className="rounded" /> : <Image src={UserPng} alt="avatar" className="" width={40} height={40} />}
         <div>
           <p className="font-semibold text-sm mb-1">{reviewerName} wrote a review</p>
-          <p className="text-xs">{createdAt?.toString() ?? createdAt}</p>
+          <p className="text-xs">{formatDate(createdAt)}</p>
         </div>
       </div>
       <div>

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '../ui/card';
 
 import { ReviewType } from '@/utils/types';
+import { formatDate } from '@/utils/functions';
 
 const Review = ({image, reviewerName, vendorName, createdAt, description, rating}: ReviewType) => {
   return (
@@ -20,7 +21,7 @@ const Review = ({image, reviewerName, vendorName, createdAt, description, rating
             <div className="mt-4 text-center">
               <h2 className="text-lg  capitalize">{reviewerName}</h2>
               <p className="text-muted-foreground  mt-2">
-                {createdAt.toString()}
+                {formatDate(createdAt)}
               </p>
             </div>
           </div>

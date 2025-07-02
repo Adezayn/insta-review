@@ -1,7 +1,6 @@
-import { collection, getDocs, doc, getDoc, updateDoc, addDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, updateDoc, addDoc, query, where, orderBy, limit } from "firebase/firestore";
 import { database } from "@/utils/firebaseConfig";
-import { CreateReviewType, ReviewType, VendorType } from "../../utils/types";
-import { formatDate } from "@/utils/functions";
+import { CreateReviewType, ReviewResponseType, ReviewType, VendorType } from "../../utils/types";
 
 export const fetchFeaturedReviews = async () => {
   console.log("🚀 Fetching featured reviews...");
@@ -9,11 +8,18 @@ export const fetchFeaturedReviews = async () => {
   let result: ReviewType[] = [], error = null;
 
   try {
-    const reviewsSnapshot = await getDocs(collection(database, "reviews"));
+    const reviewsQuery = query(
+        collection(database, "reviews"),      // your collection name
+        orderBy("createdAt", "desc"),   // sort by date, newest first
+    );
+    const reviewsSnapshot = await getDocs(reviewsQuery);
 
     const reviewsData = await Promise.all(
       reviewsSnapshot.docs.map(async (reviewDoc) => {
-        const review = reviewDoc.data() as ReviewType;
+        const review = {
+          ...(reviewDoc.data() as ReviewResponseType),
+          id: reviewDoc.id
+        };
 
         const reviewerRef = doc(database, "users", review.reviewerId);
         const vendorRef = doc(database, "vendors", review.vendorId);
@@ -28,6 +34,57 @@ export const fetchFeaturedReviews = async () => {
 
         return {
           ...review,
+          createdAt: review.createdAt.toDate(),
+          reviewerName: reviewer.name || 'Unknown Reviewer',
+          vendorName: vendor.name || 'Unknown Vendor'
+        };
+      })
+    );
+
+    result = reviewsData;
+    console.log("✅ Enriched Reviews:", result);
+  } catch (e) {
+    console.error("❌ Error fetching enriched reviews:", e);
+    error = e;
+  }
+
+  return { result, error };
+};
+
+export const fetchLatestSixFeaturedReviews = async () => {
+  console.log("🚀 Fetching featured reviews...");
+
+  let result: ReviewType[] = [], error = null;
+
+  try {
+    const reviewsQuery = query(
+        collection(database, "reviews"),      // your collection name
+        orderBy("createdAt", "desc"),   // sort by date, newest first
+        limit(9)                        // get only first 6 results
+      );
+    const reviewsSnapshot = await getDocs(reviewsQuery);
+
+    const reviewsData = await Promise.all(
+      reviewsSnapshot.docs.map(async (reviewDoc) => {
+        const review = {
+          ...(reviewDoc.data() as ReviewResponseType),
+          id: reviewDoc.id
+        };
+
+        const reviewerRef = doc(database, "users", review.reviewerId);
+        const vendorRef = doc(database, "vendors", review.vendorId);
+
+        const [reviewerSnap, vendorSnap] = await Promise.all([
+          getDoc(reviewerRef),
+          getDoc(vendorRef)
+        ]);
+
+        const reviewer = reviewerSnap.exists() ? reviewerSnap.data() : {};
+        const vendor = vendorSnap.exists() ? vendorSnap.data() : {};
+
+        return {
+          ...review,
+          createdAt: review.createdAt.toDate(),
           reviewerName: reviewer.name || 'Unknown Reviewer',
           vendorName: vendor.name || 'Unknown Vendor'
         };
@@ -49,8 +106,11 @@ export const fetchAllVendors = async () => {
 
   let result: VendorType[] = [], error = null;
   try {
-    const postsCollectionRef = collection(database, "vendors");
-     const querySnapshot = await getDocs(postsCollectionRef);
+        const vendorsQuery = query(
+        collection(database, "vendors"),      // your collection name
+        orderBy("rating", "desc"),   // sort by rating, highest numbers of ratings first
+      );
+     const querySnapshot = await getDocs(vendorsQuery);
 
      // Map through the documents and extract data
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -63,6 +123,48 @@ export const fetchAllVendors = async () => {
 
   } catch (e) {
     console.log("Error result in all Vendors", e);
+    error = e;
+  }
+
+  return { result, error };
+};
+
+export const fetchReviewsByVendor = async (vendorId: string) => {
+  console.log(`🚀 Fetching reviews for vendor ${vendorId}...`);
+
+  let result: ReviewType[] = [], error = null;
+
+  try {
+    const reviewsQuery = query(
+      collection(database, "reviews"),
+      where("vendorId", "==", vendorId)
+    );
+
+    const reviewsSnapshot = await getDocs(reviewsQuery);
+
+    const reviewsData = await Promise.all(
+      reviewsSnapshot.docs.map(async (reviewDoc) => {
+        const review = {
+          ...(reviewDoc.data() as ReviewResponseType),
+          id: reviewDoc.id
+        };
+
+        const reviewerRef = doc(database, "users", review.reviewerId);
+        const reviewerSnap = await getDoc(reviewerRef);
+        const reviewer = reviewerSnap.exists() ? reviewerSnap.data() : {};
+
+        return {
+          ...review,
+          createdAt: review.createdAt.toDate(),
+          reviewerName: reviewer.name || 'Unknown Reviewer'
+        };
+      })
+    );
+
+    result = reviewsData;
+    console.log("✅ Reviews for vendor:", result);
+  } catch (e) {
+    console.error("❌ Error fetching reviews for vendor:", e);
     error = e;
   }
 
@@ -107,7 +209,7 @@ export const updateRating = async (vendorId: string, newRating: number) => {
 export const createReview = async (review: CreateReviewType) => {
     try {
       await addDoc(collection(database, "reviews"), {
-        createdAt: formatDate(new Date()),
+        createdAt: new Date(),
         reviewerId: review.reviewerId,
         vendorId: review.vendorId,
         description: review.description,

@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export type User = {
   uid: string;
   name: string; // full name for reviewer, business name for vendors
@@ -24,6 +26,20 @@ export type ReviewType = {
   createdAt: Date;
   rating: number;
 };
+
+export type ReviewResponseType = {
+  id: string;
+  reviewerId: string;
+  image: string;
+  reviewerName: string;
+  vendorImage: string;
+  vendorId: string;
+  vendorName: string;
+  description: string;
+  createdAt: Timestamp;
+  rating: number;
+};
+
 
 export type CreateReviewType = {
   reviewerId: string;

@@ -1,18 +1,16 @@
 "use client"
 import { createReview, updateRating } from '@/app/actions/actions';
-// import { uploadFileToDb } from '@/app/actions/storage';
-import ClickableRating from '@/components/global/ClickableRating';
-import FileUploader from '@/components/global/FileUploader';
-import LoadingSpinner from '@/components/global/LoadingSpinner';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import React, { useState } from 'react'
+import ClickableRating from '../global/ClickableRating';
+import { Textarea } from '../ui/textarea';
+import FileUploader from '../global/FileUploader';
+import { Button } from '../ui/button';
 import { useAppSelector } from '@/redux/hooks';
-import { useState } from 'react';
+import LoadingSpinner from '../global/LoadingSpinner';
 
-const VendorDetails = () => {
-  const {id: vendorId, name} = useAppSelector(state => state.vendors);
+const UserSubmitReview = () => {
   const {uid} = useAppSelector(state => state.users);
-
+  const {id: vendorId} = useAppSelector(state => state.vendors);
   const [review, setReview] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
   const [file, setFile] = useState<File | null>(null);
@@ -47,21 +45,17 @@ const VendorDetails = () => {
       setLoading(false);
     }
   }
-
   return (
-    <div className='mx-12'>
-      <p>{name}</p>
-      <div className='mt-4'>
+        <div className='mt-4'>
          <ClickableRating handleClick={setRating}/>
          <Textarea className="mt-6" placeholder="Type your message here." value={review} onChange={(e)=>{setReview(e.target.value)}}/>
           <FileUploader file={file} setFile={setFile}/>
           <Button size="lg" className='mt-10' onClick={handleSubmitReview}>
             Submit a Review
           </Button>
+          {loading && <LoadingSpinner />}
       </div>
-         {loading && <LoadingSpinner />}
-    </div>
   )
 }
 
-export default VendorDetails; 
+export default UserSubmitReview

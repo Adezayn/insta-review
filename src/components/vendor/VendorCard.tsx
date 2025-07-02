@@ -11,8 +11,7 @@ const VendorCard= ({data}: {data: VendorType}) => {
   const {image, name, description, rating, category, averageRating, id}: VendorType = data;
   const dispatch = useAppDispatch();
   return (
-    //  <Link href={`/vendors/${name}`}>
-     <Link href={`/vendors/${id}`} onClick={()=>{dispatch(updateVendor(data))}}>
+     <Link href={`/vendors/${name}`} onClick={()=>{dispatch(updateVendor(data))}}>
         <div className="rounded-md border border-gray-300 p-4 flex flex-row justify-center text-center flex-1">
           {image && <Image src={image} alt={name} />}
           <div>
