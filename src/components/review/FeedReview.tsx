@@ -21,7 +21,7 @@ const FeedReview = ({image, vendorImage, vendorName, reviewerName, createdAt, de
       </div>
       <div className="mt-3">
         <p className="font-bold mb-2">{vendorName}</p>
-         <Rate averageRating={rating} />
+         {rating ? <Rate averageRating={rating} /> : <></>}
         {description && <p className="text-sm mt-2">{description}</p>}
       </div>
     </div>

@@ -1,6 +1,5 @@
 
 "use client";
-
 import { useEffect, useState } from "react";
 import FeedReview from "./FeedReview";
 import EmptyList from '../global/EmptyList';

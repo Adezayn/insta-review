@@ -13,7 +13,7 @@ const VendorDetails = () => {
     <div className='mx-12'>
       <p>{name}</p>
       <UserSubmitReview />
-     <ReviewsPerVendor vendorId={vendorId} />
+      <ReviewsPerVendor vendorId={vendorId} />
          {/* {loading && <LoadingSpinner />} */}
     </div>
   )
