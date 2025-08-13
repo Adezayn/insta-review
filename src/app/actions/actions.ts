@@ -1,6 +1,6 @@
 import { collection, getDocs, doc, getDoc, updateDoc, addDoc, query, where, orderBy, limit } from "firebase/firestore";
 import { database } from "@/utils/firebaseConfig";
-import { CreateReviewType, ReviewResponseType, ReviewType, VendorType } from "../../utils/types";
+import { CreateReviewType, ReviewResponseType, ReviewType, User, VendorType } from "../../utils/types";
 
 export const fetchFeaturedReviews = async () => {
   console.log("🚀 Fetching featured reviews...");
@@ -108,7 +108,7 @@ export const fetchAllVendors = async () => {
   try {
         const vendorsQuery = query(
         collection(database, "vendors"),      // your collection name
-        orderBy("rating", "desc"),   // sort by rating, highest numbers of ratings first
+        orderBy("totalRating", "desc"),   // sort by rating, highest numbers of ratings first
       );
      const querySnapshot = await getDocs(vendorsQuery);
 
@@ -185,18 +185,26 @@ export const updateRating = async (vendorId: string, newRating: number) => {
     }
 
     const data = vendorSnap.data();
-    const currentCount: number = data.rating || 0;
+    const currentCount: number = data.totalRating || 0;
     const currentAverage: number = data.averageRating || 0;
+    const currentBreakdown: Record<string, number> = data.ratingsCount || {
+      1: 0, 2: 0, 3: 0, 4: 0, 5: 0
+    };
 
     // Step 2: Calculate new values
     const totalRating = currentAverage * currentCount;
     const newCount = currentCount + 1;
     const newAverage = (totalRating + newRating) / newCount;
 
-    // Step 3: Update Firestore
+    // Step 3: Update breakdown
+    const newBreakdown = { ...currentBreakdown };
+    newBreakdown[newRating] = (newBreakdown[newRating] || 0) + 1;
+
+    // Step 4: Update Firestore
     await updateDoc(vendorRef, {
-      rating: newCount,
-      averageRating: parseFloat(newAverage.toFixed(2))
+      totalRating: newCount,
+      averageRating: parseFloat(newAverage.toFixed(2)),
+      ratingsCount: newBreakdown
     });
 
     console.log("✅ Rating updated successfully");
@@ -212,7 +220,7 @@ export const createReview = async (review: CreateReviewType) => {
         createdAt: new Date(),
         reviewerId: review.reviewerId,
         vendorId: review.vendorId,
-        description: review.description,
+        comment: review.comment,
         rating: review.rating,
         imageUrl: review?.imageUrl
       });
@@ -221,4 +229,54 @@ export const createReview = async (review: CreateReviewType) => {
       console.error("Error saving review:", error);
       throw error;
     }
-}
+};
+
+export const getVendorDetails = async (id: string) => {
+  console.log("🚀 Fetching vendor details...");
+
+  let result: VendorType | null = null;
+  let error = null;
+
+  try {
+    const vendorRef = doc(database, "vendors", id);
+    const docSnap = await getDoc(vendorRef);
+
+    if (docSnap.exists()) {
+      result = { id: docSnap.id, ...docSnap.data() } as VendorType;
+      console.log("✅ Vendor found:", result);
+    } else {
+      console.log("❌ No vendor found with that ID.");
+    }
+
+  } catch (e) {
+    console.log("🔥 Error fetching vendor:", e);
+    error = e;
+  }
+
+  return { result, error };
+};
+
+export const getReviewerDetails = async (id: string) => {
+  console.log("🚀 Fetching reviewer details...");
+
+  let result: User | null = null;
+  let error = null;
+
+  try {
+    const vendorRef = doc(database, "users", id);
+    const docSnap = await getDoc(vendorRef);
+
+    if (docSnap.exists()) {
+      result = { uid: docSnap.id, ...docSnap.data() } as User;
+      console.log("✅ User found:", result);
+    } else {
+      console.log("❌ No reviewer found with that ID.");
+    }
+
+  } catch (e) {
+    console.log("🔥 Error fetching reviewer:", e);
+    error = e;
+  }
+
+  return { result, error };
+};

@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { updateVendor } from "@/redux/vendorSlice";
 
 const VendorCard= ({data}: {data: VendorType}) => {
-  const {image, name, description, rating, category, averageRating, id}: VendorType = data;
+  const {image, name, description, totalRating, category, averageRating, id}: VendorType = data;
   const dispatch = useAppDispatch();
   return (
      <Link href={`/vendors/${name}`} onClick={()=>{dispatch(updateVendor(data))}}>
@@ -16,7 +16,7 @@ const VendorCard= ({data}: {data: VendorType}) => {
           {image && <Image src={image} alt={name} />}
           <div>
             <p className="font-semibold mb-4">{name}</p>
-            <div className="mb-4"><RatingInfo rating={rating} averageRating={averageRating} /></div>
+            <div className="mb-4"><RatingInfo rating={totalRating} averageRating={averageRating} /></div>
             <p className="mb-4">{description}</p>
             <div className="flex gap-4">
               {category.map(each =><p className="py-2 px-4 bg-slate-200 rounded-full from-neutral-700 text-sm" key={each}>{each}</p>)}

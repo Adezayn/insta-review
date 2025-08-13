@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex flex-col h-screen">
         <SidebarProvider className="">
-          <AppSidebar items={items}/>
+          <AppSidebar items={items} contentStyling="pt-16"/>
           <main className="w-full bg-gray-50 overflow-y-auto">
             <SidebarTrigger />
             {children}

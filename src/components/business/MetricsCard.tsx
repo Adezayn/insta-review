@@ -3,7 +3,7 @@ import { IconType } from "react-icons"
 
 type PropsType = {
   title: string, 
-  metrics: string, 
+  metrics: number, 
   icon: IconType,
   hasBorder?: boolean; 
 }

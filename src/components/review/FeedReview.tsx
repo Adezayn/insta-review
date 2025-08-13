@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Rate } from "../global/RatingInfo";
 import { formatDate } from "@/utils/functions";
 
-const FeedReview = ({image, vendorImage, vendorName, reviewerName, createdAt, description, rating}: ReviewType) => {
+const FeedReview = ({image, vendorImage, vendorName, reviewerName, createdAt, comment, rating}: ReviewType) => {
   return (
     <div className="border border-gray-200 p-4 shadow-sm rounded-sm">
       <div className="flex items-center gap-2 border-b border-b-gray-200 pb-3">
@@ -22,7 +22,7 @@ const FeedReview = ({image, vendorImage, vendorName, reviewerName, createdAt, de
       <div className="mt-3">
         <p className="font-bold mb-2">{vendorName}</p>
          {rating ? <Rate averageRating={rating} /> : <></>}
-        {description && <p className="text-sm mt-2">{description}</p>}
+        {comment && <p className="text-sm mt-2">{comment}</p>}
       </div>
     </div>
   );

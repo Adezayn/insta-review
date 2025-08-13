@@ -1,26 +1,30 @@
+'use client'
 import MetricsCard from "./MetricsCard";
 // import { IoIosClock } from "react-icons/io";
 import { FaStar } from "react-icons/fa6";
 import { FaChartLine } from "react-icons/fa";
 import { HiMiniChatBubbleLeftEllipsis } from "react-icons/hi2";
 import { Card } from "../ui/card";
+import { useAppSelector } from "@/redux/hooks";
 
 
 const Metrics = () => {
+    const {id: vendorId, name, averageRating, totalRating, positiveFeedback} = useAppSelector(state => state.vendors);
+    console.log(averageRating, "avg-rating-total", totalRating)
     const metricsContent = [
         {
             title: "Average Rating",
-            metrics: "",
+            metrics: averageRating,
             icon: FaStar
         },
         {
             title: "Total Reviews",
-            metrics: "",
+            metrics: totalRating,
             icon: HiMiniChatBubbleLeftEllipsis
         },
         {
         title: "Positive Feedback",
-        metrics: "",
+        metrics: positiveFeedback,
         icon: FaChartLine
         }
     ]

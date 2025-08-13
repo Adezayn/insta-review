@@ -12,7 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from '../ui/button';
-import { signIn, getUserDetails, signInWithGoogle } from '@/app/actions/auth';
+import { signIn, getUserDetailsByRole, signInWithGoogle } from '@/app/actions/auth';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { redirectToDashboard } from '@/utils/functions';
@@ -20,9 +20,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import { z } from 'zod';
 import LoadingSpinner from '../global/LoadingSpinner';
+import { useAppDispatch } from '@/redux/hooks';
+import { updateVendor } from '@/redux/vendorSlice';
+import { updateAuthInfo } from '@/redux/authSlice';
 
 const VendorLogin = () => {
   const router = useRouter();
+   const dispatch = useAppDispatch();
   const userRole = "vendors"
   const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -66,11 +70,19 @@ const VendorLogin = () => {
         });
 
         // Fetch role from Firestore
-        const { user } = await getUserDetails(result.user.uid, userRole);
+        const { user } = await getUserDetailsByRole(result.user.uid, userRole);
+        const userInfo = {
+            ...user,
+            uid: result.user.uid
+          }
+
+          console.log(userInfo, "===userinfo====")
+        // dispatch(updateVendor(userInfo));
+        dispatch(updateAuthInfo(userInfo))
         const role = user && user?.role;
         console.log(role, '=role of user on email login=')
         // Redirect based on role
-       redirectToDashboard(role, router)
+      //  redirectToDashboard(role, router)
         console.log(result, "---res");
       }
     } catch (error) {
@@ -106,13 +118,13 @@ const VendorLogin = () => {
         });
 
         // Fetch role from Firestore
-        const { user } = await getUserDetails(result.user.uid, userRole);
+        const { user } = await getUserDetailsByRole(result.user.uid, userRole);
 
         console.log(user, "===user in login component===")
         const role = user && user?.role;
         console.log(role, '=role of user on google signin=')
         // Redirect based on role
-        redirectToDashboard(role, router);
+        // redirectToDashboard(role, router);
       }
   };
     return (

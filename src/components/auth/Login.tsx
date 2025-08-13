@@ -17,7 +17,7 @@ const Login = () => {
             </p>
           }
           description=""
-          button={<Button>Log In</Button>}
+          button={<Button >Log In</Button>}
         >
           <Tabs defaultValue="reviewer">
             <TabsList className="grid w-full grid-cols-2">

@@ -23,15 +23,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <ProtectedRoute>
       <div className="h-screen">
         <Navbar />
-        <div className="flex flex-col">
-          <SidebarProvider>
-          <AppSidebar items={items}/>
-          <main className="w-full bg-gray-50 overflow-y-auto px-6">
-            <SidebarTrigger />
-            {children}
-          </main>
+        <SidebarProvider>
+            <AppSidebar items={items} className="h-[calc(100vh-89px)] mt-[89px]" contentStyling="pt-8"/>
+            <main className="w-full overflow-y-auto px-6 mt-[89px] pt-12 md:pt-8">
+              <SidebarTrigger />
+              {children}
+            </main>
           </SidebarProvider>
-        </div>
       </div>
     </ProtectedRoute>
   );

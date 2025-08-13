@@ -14,6 +14,7 @@ import Link from "next/link";
 import ViewProfile from "./ViewProfile";
 import { usePathname } from "next/navigation";
 import { LucideIcon } from "lucide-react";
+import Logout from "./Logout";
 
 // Menu item
 type ItemType =   {
@@ -23,15 +24,18 @@ type ItemType =   {
 };
 
 type PropType = {
-  items: ItemType[]
+  items: ItemType[],
+  className?: string,
+  contentStyling?: string
 }
 
-export const AppSidebar:React.FC<PropType> = ({items}) => {
+export const AppSidebar:React.FC<PropType> = ({items, className, contentStyling}) => {
   const pathname = usePathname();
   return (
-    <Sidebar>
-      <SidebarContent className="pt-16">
+    <Sidebar className={className}>
+      <SidebarContent className={contentStyling}>
         <SidebarGroup>
+          <ViewProfile />
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
@@ -54,7 +58,7 @@ export const AppSidebar:React.FC<PropType> = ({items}) => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <ViewProfile />
+        <Logout />
       </SidebarFooter>
     </Sidebar>
   );

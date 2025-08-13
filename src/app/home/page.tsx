@@ -1,6 +1,8 @@
 
+import LoadingContainer from "@/components/global/LoadingContainer";
 import FeedReviewGrid from "@/components/review/FeedReviewGrid";
 import { Input } from "@/components/ui/input";
+import { Suspense } from "react";
 
 const HomePage = () => {
   return (
@@ -8,7 +10,9 @@ const HomePage = () => {
             <div className="w-1/3">
               <Input placeholder="search" />
             </div>
-          <FeedReviewGrid />
+            <Suspense fallback={<LoadingContainer />}>
+              <FeedReviewGrid />
+            </Suspense>
       </div>
   );
 }

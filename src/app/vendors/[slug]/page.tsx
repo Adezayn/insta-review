@@ -1,6 +1,4 @@
 "use client"
-import LoadingContainer from '@/components/global/LoadingContainer';
-import LoadingSpinner from '@/components/global/LoadingSpinner';
 import ReviewsPerVendor from '@/components/review/ReviewsPerVendor';
 import UserSubmitReview from '@/components/users/UserSubmitReview';
 import { useAppSelector } from '@/redux/hooks';
@@ -14,7 +12,6 @@ const VendorDetails = () => {
       <p>{name}</p>
       <UserSubmitReview />
       <ReviewsPerVendor vendorId={vendorId} />
-         {/* {loading && <LoadingSpinner />} */}
     </div>
   )
 }

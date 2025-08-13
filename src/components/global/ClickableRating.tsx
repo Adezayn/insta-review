@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FaStar } from "react-icons/fa";
 
-const ClickableRating = ({handleClick}: {handleClick: (e:number)=>void}) => {
+const ClickableRating = ({handleClick, rating}: {handleClick: (e:number)=>void, rating: number}) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number>(0);
 
+  // i want the rating updated to 0 after submitting review so that the stars become unselected
   return (
     <div className="flex space-x-1">
       {Array.from({ length: 5 }, (_, index) => {

@@ -32,11 +32,11 @@ export function FilterInput() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-1/2 justify-between"
+          className="justify-between"
         >
           {value
             ? categoriesList.find((x) => x.name === value)?.name
-            : "Select framework..."}
+            : "Select category..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>

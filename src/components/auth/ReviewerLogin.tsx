@@ -12,19 +12,19 @@ import {
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from '../ui/button';
-import { signIn, getUserDetails, signInWithGoogle } from '@/app/actions/auth';
+import { signIn, getUserDetailsByRole, signInWithGoogle } from '@/app/actions/auth';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { redirectToDashboard } from '@/utils/functions';
+// import { redirectToDashboard } from '@/utils/functions';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { z } from 'zod';
 import LoadingSpinner from '../global/LoadingSpinner';
 import { useAppDispatch } from '@/redux/hooks';
-import { updateUser } from '@/redux/userSlice';
+import { updateAuthInfo } from '@/redux/authSlice';
 
 const ReviewerLogin = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const dispatch = useAppDispatch();
   const userRole = "users"
   const formSchema = z.object({
@@ -67,15 +67,16 @@ const ReviewerLogin = () => {
         });
 
         // Fetch role from Firestore
-        const { user } = await getUserDetails(result.user.uid, userRole);
-        const userInfo = {
-          ...user,
-          uid: result.user.uid
-        }
-        dispatch(updateUser(userInfo));
-        const role = user && user?.role;
+        // const { user } = await getUserDetailsByRole(result.user.uid, userRole);
+        // const userInfo = {
+        //   ...user,
+        //   uid: result.user.uid
+        // }
+          // dispatch(updateUser(userInfo));
+        // dispatch(updateAuthInfo(userInfo))
+       // const role = user && user?.role;
         // Redirect based on role
-       redirectToDashboard(role, router);
+      //  redirectToDashboard(role, router);
       }
     } catch (error) {
       console.error("Unexpected error during login:", error);
@@ -110,17 +111,18 @@ const ReviewerLogin = () => {
         });
 
         // Fetch role from Firestore
-        const { user } = await getUserDetails(result.user.uid, userRole);
+        // const { user } = await getUserDetailsByRole(result.user.uid, userRole);
 
-        const userInfo = {
-          ...user,
-          uid: result.user.uid
-        }
-        dispatch(updateUser(userInfo));
+        // const userInfo = {
+        //   ...user,
+        //   uid: result.user.uid
+        // }
+        // dispatch(updateUser(userInfo));
+        // dispatch(updateAuthInfo(userInfo))
         
-        const role = user && user?.role;
+        // const role = user && user?.role;
         // Redirect based on role
-        redirectToDashboard(role, router);
+        // redirectToDashboard(role, router);
       }
   };
     return (

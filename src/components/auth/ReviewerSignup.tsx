@@ -20,6 +20,8 @@ import { cn } from "@/lib/utils";
 import LoadingSpinner from "../global/LoadingSpinner";
 import { redirectToDashboard } from "@/utils/functions";
 import { useRouter } from "next/navigation";
+import { AuthUserContext } from "@/context/AuthUserContext";
+import useAuth from "@/hooks/useAuth";
 
 const formSchema = z.object({
   name: z.string().min(1, "Full name is required"),
@@ -98,8 +100,10 @@ const ReviewerSignup = () => {
       };
       console.log(user, "===user===");
       await saveUserDetails(user);
-      console.log(result, "---res");
-      redirectToDashboard(userRole, router)
+      // const {setAuthUserInfo } = useAuth();
+      // setAuthUserInfo({role: userRole})
+      console.log(result, "---res"); 
+      // redirectToDashboard(userRole, router)
     }
     if (error) {
       toast({

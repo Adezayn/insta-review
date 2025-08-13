@@ -115,7 +115,7 @@ export const saveVendorsDetails = async (user: Vendor) => {
 
 
 
-export const getUserDetails = async (id: string, role: string) => {
+export const getUserDetailsByRole = async (id: string, role: string) => {
    let user = null,
      error = null;
   try {
@@ -135,6 +135,36 @@ export const getUserDetails = async (id: string, role: string) => {
 
   return { user, error };
 };
+
+export const getUserDetails = async (id: string) => {
+  let user = null;
+  let error = null;
+
+  const collections = ['users', 'vendors'];
+
+  try {
+    for (const collection of collections) {
+      const ref = doc(database, collection, id);
+      const result = await getDoc(ref);
+
+      if (result.exists()) {
+        user = result.data();
+        console.log(`User found in collection "${collection}"`, user);
+        break;
+      }
+    }
+
+    if (!user) {
+      console.log(`User with ID ${id} not found in 'users' or 'reviewers'`);
+    }
+  } catch (e) {
+    console.log('Error fetching user details:', e);
+    error = e;
+  }
+
+  return { user, error };
+};
+
 
 export const verifyInstagramHandle = async (handle: string) => {
   let result = null

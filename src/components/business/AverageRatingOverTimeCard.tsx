@@ -38,7 +38,7 @@ const chartConfig = {
 
 const AverageRatingOverTimeCard = () => {
   return (
-    <Card className="md:w-1/2">
+    <Card className="lg:w-1/2">
       <CardHeader>
         <CardTitle>Average Rating - Dots</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
@@ -85,7 +85,7 @@ const AverageRatingOverTimeCard = () => {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div> */}
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Showing average rating for the last 6 months
         </div>
       </CardFooter>
     </Card>

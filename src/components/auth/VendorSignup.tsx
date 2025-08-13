@@ -74,7 +74,7 @@ const VendorSignup = () => {
           console.log(user, "===user===");
             await saveVendorsDetails(user);
             console.log(result, "---res");
-            redirectToDashboard(userRole, router)
+            // redirectToDashboard(userRole, router)
         }
         if (error) {
             toast({

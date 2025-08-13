@@ -16,7 +16,7 @@ export const Signup = () => {
         </p>
       }
       description=""
-      button={<Button>Sign Up</Button>}
+      button={<Button className="bg-pink-500">Sign Up</Button>}
     >
       <Tabs defaultValue="reviewer">
         <TabsList className="grid w-full grid-cols-2">

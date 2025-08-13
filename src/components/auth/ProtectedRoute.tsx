@@ -1,24 +1,27 @@
 'use client'
-import { useAuth } from "@/context/AuthUserContext";
-import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
+import { usePathname, useRouter } from "next/navigation";
 import LoadingSpinner from "../global/LoadingSpinner";
+import { useEffect } from "react";
+import { useAppSelector } from "@/redux/hooks";
 
 const ProtectedRoute = ({ children }: {children: React.ReactNode}) => {
   const { authUser, loading } = useAuth();
- // console.log(authUser, "=====authuser===")
+   const {role} = useAppSelector(state => state.auth);
   const router = useRouter();
+  const pathname = usePathname();
 
-  if (loading) return <LoadingSpinner />;
-
-  if (!authUser) {
+ useEffect(()=>{
+ if (!authUser) {
     router.push("/");
-    return null;
-  } else if (authUser.role === "vendor") {
+  } else if (role === "vendor" && !pathname.startsWith("/business")) {
     router.push("/business");
-  } else if (authUser.role === "reviewer") {
+  } else if (role === "user") {
     router.push("/home");
   }
+ },[authUser, role])
 
+  if (loading) return <LoadingSpinner />;
   return children;
 };
 

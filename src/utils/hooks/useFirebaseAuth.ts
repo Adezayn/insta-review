@@ -6,15 +6,17 @@ import {
   onAuthStateChanged as _onAuthStateChanged,
   NextOrObserver,
   User,
+  signOut
 } from "firebase/auth";
 
-export type FormattedUser = {
+export type FormattedUser = User & {
   uid: string;
   email: string | null;
   role?: string
 };
 
 const formatAuthUser = (user: User): FormattedUser => ({
+  ...user,
   uid: user.uid,
   email: user.email,
 });
@@ -25,7 +27,6 @@ export default function useFirebaseAuth() {
 
   const authStateChanged = async (authState: User | null) => {
     setLoading(true);
-
     if (!authState) {
       setAuthUser(null);
       setLoading(false);
@@ -37,7 +38,22 @@ export default function useFirebaseAuth() {
     setLoading(false);
   };
 
+const setAuthUserInfo = (userInfo: Partial<FormattedUser>) => {
+  setAuthUser((prev) => {
+    if (!prev) return userInfo as FormattedUser; // cast safely if no previous user
+    return { ...prev, ...userInfo };
+  });
+};
+
+  const logout = async () => {
+    setLoading(true);
+    await signOut(auth);
+    setAuthUser(null); // optional, as authStateChanged will run on signOut
+    setLoading(false);
+  };
+
   const onAuthStateChanged = (cb: NextOrObserver<User>) => {
+    // console.log(auth, "===auth&cb=====")
     return _onAuthStateChanged(auth, cb);
   };
 
@@ -49,5 +65,7 @@ export default function useFirebaseAuth() {
   return {
     authUser,
     loading,
+    logout,
+    setAuthUserInfo
   };
 }

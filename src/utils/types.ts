@@ -22,7 +22,7 @@ export type ReviewType = {
   vendorImage: string;
   vendorId: string;
   vendorName: string;
-  description: string;
+  comment: string;
   createdAt: Date;
   rating: number;
 };
@@ -35,16 +35,16 @@ export type ReviewResponseType = {
   vendorImage: string;
   vendorId: string;
   vendorName: string;
-  description: string;
+  comment: string;
   createdAt: Timestamp;
   rating: number;
 };
 
 
 export type CreateReviewType = {
-  reviewerId: string;
+  reviewerId: string | null;
   vendorId: string;
-  description: string;
+  comment: string;
   rating: number;
   imageUrl?: string
 };
@@ -55,10 +55,11 @@ export type VendorType = {
   email: string;
   instagramHandle: string;
   category: string[];
-  rating: number;
   image: string;
   description: string;
   id: string;
   averageRating: number;
-
-}
+  totalRating: number;
+  positiveFeedback: number;
+  ratingsCount: {1: number, 2: number, 3: number, 4: number, 5: number }
+};

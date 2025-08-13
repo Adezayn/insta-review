@@ -4,7 +4,7 @@ import { Card, CardContent } from '../ui/card';
 import { ReviewType } from '@/utils/types';
 import { formatDate } from '@/utils/functions';
 
-const Review = ({image, reviewerName, vendorName, createdAt, description, rating}: ReviewType) => {
+const Review = ({image, reviewerName, vendorName, createdAt, comment, rating}: ReviewType) => {
   return (
     <article className="group relative">
       <Card className="transform group-hover:shadow-xl transition-shadow duration-500">
@@ -25,7 +25,7 @@ const Review = ({image, reviewerName, vendorName, createdAt, description, rating
               </p>
             </div>
           </div>
-          <p>{description}</p>
+          <p>{comment}</p>
           <div>{rating}</div>
         </CardContent>
       </Card>

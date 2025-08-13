@@ -6,18 +6,17 @@ import {
 } from "lucide-react";
 
 const ViewProfile = () => {
-  const {name} = useAppSelector(state => state.users);
+  const {name, email} = useAppSelector(state => state.auth);
   return (
     <div className="flex justify-between mb-4">
         <div className="flex gap-2">
           <CircleUserRound />
           <div>
-            <p>{name}</p>
+            <p>{email}</p>
             {/* <p className="mb-4 mt-1">View profile</p> */}
           </div>
         </div>
         {/* <Settings /> */}
-        <LogOutIcon />
     </div>
   )
 };
