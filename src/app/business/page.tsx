@@ -23,9 +23,10 @@ const BusinessPage = () => {
   return (
     <div>
        {/* <Metrics /> */}
-       <AveragingRatingBreakdown />
+       {/* <AveragingRatingBreakdown /> */}
        <div className="flex flex-col lg:flex-row gap-8">
-          <ReviewsOverTimeCard />
+          {/* <ReviewsOverTimeCard /> */}
+             <AveragingRatingBreakdown />
           <AverageRatingOverTimeCard />
           <div>
             

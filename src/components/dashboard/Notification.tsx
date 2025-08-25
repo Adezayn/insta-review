@@ -2,8 +2,8 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 
 const Notification = () => {
   return (
-    <div>
-      <IoMdNotificationsOutline />
+    <div className="p-2 border-solid border rounded-full">
+      <IoMdNotificationsOutline size={16} />
     </div>
   );
 };

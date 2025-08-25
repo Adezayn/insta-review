@@ -24,8 +24,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="h-screen">
         <Navbar />
         <SidebarProvider>
-            <AppSidebar items={items} className="h-[calc(100vh-89px)] mt-[89px]" contentStyling="pt-8"/>
-            <main className="w-full overflow-y-auto px-6 mt-[89px] pt-12 md:pt-8">
+            <AppSidebar items={items} className="h-[calc(100vh-67px)] mt-[67px]" contentStyling="pt-8"/>
+            <main className="w-full overflow-y-auto px-6 mt-[67px] pt-12 md:pt-8">
               <SidebarTrigger />
               {children}
             </main>

@@ -8,7 +8,7 @@ import { Suspense } from "react";
 
 const VendorsPage = async () => {
   return (
-      <div className="mx-6">
+    <div className="mx-6">
             <div className="flex justify-between">
               <div className="w-1/2">
                 <FilterInput />

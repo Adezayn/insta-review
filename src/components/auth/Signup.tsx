@@ -20,8 +20,8 @@ export const Signup = () => {
     >
       <Tabs defaultValue="reviewer">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="reviewer">Signup as a Reviewer</TabsTrigger>
-          <TabsTrigger value="vendor">Signup as a Vendor</TabsTrigger>
+          <TabsTrigger value="reviewer">As a Reviewer</TabsTrigger>
+          <TabsTrigger value="vendor">As a Vendor</TabsTrigger>
         </TabsList>
         <TabsContent value="reviewer">
           <Card>

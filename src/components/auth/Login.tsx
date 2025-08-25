@@ -10,8 +10,8 @@ const Login = () => {
   return (
      <DialogContainer
           title={
-            <p>
-              <span>Sign up for </span>
+            <p className="text-center">
+              <span>Login on </span>
               <span className="text-pink-500">insta</span>
               <span className="text-indigo-600">Review</span>
             </p>
@@ -21,8 +21,8 @@ const Login = () => {
         >
           <Tabs defaultValue="reviewer">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="reviewer">Login as a Reviewer</TabsTrigger>
-              <TabsTrigger value="vendor">Login as a Vendor</TabsTrigger>
+              <TabsTrigger value="reviewer">As a Reviewer</TabsTrigger>
+              <TabsTrigger value="vendor">As a Vendor</TabsTrigger>
             </TabsList>
             <TabsContent value="reviewer">
               <Card>

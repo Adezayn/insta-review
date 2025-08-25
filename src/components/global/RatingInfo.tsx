@@ -6,20 +6,22 @@ type RateType = {
 };
  export const Rate:React.FC<RateType>= ({averageRating}) => {
  const fullRating = 5
+ let color = averageRating >= 3 && averageRating < 4  ? '#FF8742' : averageRating >= 4 ? '#FF643D' : '#faa893'
 
   return (
     <div className='flex'>{Array.from({ length: fullRating }, (_, index) => {
-        const ratingValue = index + 1;
+        const ratingValue = index + 1; // because the index starts from 0 so the first will be rating of 1
 
         if (ratingValue <= Math.floor(averageRating)) {
-          return <FaStar key={index} color="green" />;
-        } else if (
+          return <FaStar key={index} color={color} />;
+        } 
+        else if (
           ratingValue - 0.5 <= averageRating &&
           ratingValue > averageRating
         ) {
-          return <FaStarHalfAlt key={index} color="green" />;
+          return <FaStarHalfAlt key={index} color={color} />;
         } else {
-          return <FaStar key={index} color="gray" />;
+          return <FaStar key={index} color="#D0D0D0" />;
         }
       })}</div>
   )

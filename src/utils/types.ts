@@ -62,4 +62,5 @@ export type VendorType = {
   totalRating: number;
   positiveFeedback: number;
   ratingsCount: {1: number, 2: number, 3: number, 4: number, 5: number }
+  isTopTalent: boolean;
 };
