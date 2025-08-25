@@ -2,7 +2,6 @@
 import NavSearch from "@/components/dashboard/NavSearch";
 import LoadingContainer from "@/components/global/LoadingContainer";
 import FeedReviewGrid from "@/components/review/FeedReviewGrid";
-import { Input } from "@/components/ui/input";
 import { Suspense } from "react";
 
 const HomePage = () => {

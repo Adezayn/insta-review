@@ -18,10 +18,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { saveUserDetails, signUp } from "@/app/actions/auth";
 import { cn } from "@/lib/utils";
 import LoadingSpinner from "../global/LoadingSpinner";
-import { redirectToDashboard } from "@/utils/functions";
+// import { redirectToDashboard } from "@/utils/functions";
 import { useRouter } from "next/navigation";
-import { AuthUserContext } from "@/context/AuthUserContext";
-import useAuth from "@/hooks/useAuth";
+// import { AuthUserContext } from "@/context/AuthUserContext";
+// import useAuth from "@/hooks/useAuth";
 
 const formSchema = z.object({
   name: z.string().min(1, "Full name is required"),
@@ -69,7 +69,7 @@ const ReviewerSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const userRole = "user"
-  const router = useRouter();
+  // const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {

@@ -1,8 +1,8 @@
 'use client'
 import AverageRatingOverTimeCard from "@/components/business/AverageRatingOverTimeCard";
 import AveragingRatingBreakdown from "@/components/business/AveragingRatingBreakdown";
-import Metrics from "@/components/business/Metrics";
-import ReviewsOverTimeCard from "@/components/business/ReviewsOverTimeCard";
+// import Metrics from "@/components/business/Metrics";
+// import ReviewsOverTimeCard from "@/components/business/ReviewsOverTimeCard";
 import { useEffect } from "react";
 import { getVendorDetails } from "../actions/actions";
 import { updateVendor } from "@/redux/vendorSlice";

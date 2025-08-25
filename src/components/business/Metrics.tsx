@@ -9,7 +9,7 @@ import { useAppSelector } from "@/redux/hooks";
 
 
 const Metrics = () => {
-    const {id: vendorId, name, averageRating, totalRating, positiveFeedback} = useAppSelector(state => state.vendors);
+    const {averageRating, totalRating, positiveFeedback} = useAppSelector(state => state.vendors);
     console.log(averageRating, "avg-rating-total", totalRating)
     const metricsContent = [
         {

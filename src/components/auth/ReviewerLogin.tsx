@@ -12,7 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from '../ui/button';
-import { signIn, getUserDetailsByRole, signInWithGoogle } from '@/app/actions/auth';
+import { signIn, signInWithGoogle } from '@/app/actions/auth';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 // import { redirectToDashboard } from '@/utils/functions';
@@ -21,11 +21,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import LoadingSpinner from '../global/LoadingSpinner';
 import { useAppDispatch } from '@/redux/hooks';
-import { updateAuthInfo } from '@/redux/authSlice';
+// import { updateAuthInfo } from '@/redux/authSlice';
 
 const ReviewerLogin = () => {
   // const router = useRouter();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const userRole = "users"
   const formSchema = z.object({
   email: z.string().email("Invalid email address"),

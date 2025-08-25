@@ -6,10 +6,10 @@ import RatingInfo from "../global/RatingInfo";
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hooks";
 import { updateVendor } from "@/redux/vendorSlice";
-import { FaAward } from "react-icons/fa";
+// import { FaAward } from "react-icons/fa";
 
 const VendorCard= ({data}: {data: VendorType}) => {
-  const {image, name, description, totalRating, category, averageRating, isTopTalent}: VendorType = data;
+  const {image, name, description, totalRating, category, averageRating}: VendorType = data;
   const dispatch = useAppDispatch();
   return (
      <Link href={`/vendors/${name}`} onClick={()=>{dispatch(updateVendor(data))}} className="cursor-pointer">

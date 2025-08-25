@@ -3,11 +3,11 @@ import { createReview, updateRating } from '@/app/actions/actions';
 import React, { useState } from 'react'
 import ClickableRating from '../global/ClickableRating';
 import { Textarea } from '../ui/textarea';
-import FileUploader from '../global/FileUploader';
+// import FileUploader from '../global/FileUploader';
 import { Button } from '../ui/button';
 import { useAppSelector } from '@/redux/hooks';
 import LoadingSpinner from '../global/LoadingSpinner';
-import { revalidatePath } from 'next/cache';
+// import { revalidatePath } from 'next/cache';
 
 const UserSubmitReview = () => {
   const {userId} = useAppSelector(state => state.auth);
@@ -15,7 +15,7 @@ const UserSubmitReview = () => {
   const {id: vendorId} = useAppSelector(state => state.vendors);
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
-  const [file, setFile] = useState<File | null>(null);
+  // const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>();
 
 

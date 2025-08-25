@@ -15,18 +15,18 @@ import { Button } from '../ui/button';
 import { signIn, getUserDetailsByRole, signInWithGoogle } from '@/app/actions/auth';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { redirectToDashboard } from '@/utils/functions';
+// import { redirectToDashboard } from '@/utils/functions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from "next/navigation";
 import { z } from 'zod';
 import LoadingSpinner from '../global/LoadingSpinner';
 import { useAppDispatch } from '@/redux/hooks';
-import { updateVendor } from '@/redux/vendorSlice';
+// import { updateVendor } from '@/redux/vendorSlice';
 import { updateAuthInfo } from '@/redux/authSlice';
 
 const VendorLogin = () => {
-  const router = useRouter();
-   const dispatch = useAppDispatch();
+  // const router = useRouter();
+  const dispatch = useAppDispatch();
   const userRole = "vendors"
   const formSchema = z.object({
   email: z.string().email("Invalid email address"),

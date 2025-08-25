@@ -1,5 +1,6 @@
 "use client"
-import { Cell, Pie, PieChart, ResponsiveContainer, Sector, SectorProps } from 'recharts';
+// import { Cell, Pie, PieChart, ResponsiveContainer, Sector, SectorProps } from 'recharts';
+import { Cell, Pie, PieChart, Sector, SectorProps } from 'recharts';
 import { FaStar } from "react-icons/fa6";
 import { useAppSelector } from '@/redux/hooks';
 import { Card } from '../ui/card';
@@ -106,7 +107,7 @@ const RatingBar = ({number, color, value}) => {
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#000'];
 
 const AveragingRatingBreakdown = () => {
- const {id: vendorId, name, averageRating, totalRating, ratingsCount} = useAppSelector(state => state.vendors);
+ const {ratingsCount} = useAppSelector(state => state.vendors);
   return (
      <Card className="my-5 py-5 flex flex-col items-center xl:w-1/2">
           {/* // <ResponsiveContainer width="100%" height="100%">

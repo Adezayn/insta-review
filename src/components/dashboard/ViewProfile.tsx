@@ -1,12 +1,10 @@
 import { useAppSelector } from "@/redux/hooks";
 import {
-  Settings,
-  CircleUserRound,
-  LogOutIcon
+  CircleUserRound
 } from "lucide-react";
 
 const ViewProfile = () => {
-  const {name, email} = useAppSelector(state => state.auth);
+  const {email} = useAppSelector(state => state.auth);
   return (
     <div className="flex justify-between mb-4">
         <div className="flex gap-2">

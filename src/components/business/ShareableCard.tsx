@@ -1,5 +1,5 @@
 
-import { FaRegShareSquare } from "react-icons/fa";
+// import { FaRegShareSquare } from "react-icons/fa";
 import { TfiShare } from "react-icons/tfi";
 
 const ShareableCard = () => {

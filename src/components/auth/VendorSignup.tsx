@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { saveVendorsDetails, signUp } from "@/app/actions/auth";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { redirectToDashboard } from "@/utils/functions";
+// import { redirectToDashboard } from "@/utils/functions";
 import LoadingSpinner from "../global/LoadingSpinner";
 import { Checkbox } from "../ui/checkbox";
 import { categoriesList } from "@/utils/content";
@@ -38,7 +38,7 @@ const formSchema = z.object({
 
 
 const VendorSignup = () => {
-   const router = useRouter();
+  //  const router = useRouter();
    const userRole = "vendor"
    const [isLoading, setIsLoading] = useState(false);
    const form = useForm({

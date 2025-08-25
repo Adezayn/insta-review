@@ -6,7 +6,7 @@ type RateType = {
 };
  export const Rate:React.FC<RateType>= ({averageRating}) => {
  const fullRating = 5
- let color = averageRating >= 3 && averageRating < 4  ? '#FF8742' : averageRating >= 4 ? '#FF643D' : '#faa893'
+ const color = averageRating >= 3 && averageRating < 4  ? '#FF8742' : averageRating >= 4 ? '#FF643D' : '#faa893'
 
   return (
     <div className='flex'>{Array.from({ length: fullRating }, (_, index) => {

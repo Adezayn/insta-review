@@ -1,7 +1,7 @@
 
 import FeedReview from "./FeedReview";
 import EmptyList from '../global/EmptyList';
-import { fetchFeaturedReviews, fetchLatestSixFeaturedReviews } from '@/app/actions/actions';
+import { fetchLatestSixFeaturedReviews } from '@/app/actions/actions';
 
 const LandingPageFeedReviews = async () => {
      const {result, error} =  await fetchLatestSixFeaturedReviews();

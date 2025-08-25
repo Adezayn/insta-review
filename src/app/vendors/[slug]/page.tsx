@@ -2,7 +2,6 @@
 import ReviewsPerVendor from '@/components/review/ReviewsPerVendor';
 import UserSubmitReview from '@/components/users/UserSubmitReview';
 import { useAppSelector } from '@/redux/hooks';
-import { Suspense } from 'react';
 
 const VendorDetails = () => {
   const {id: vendorId, name} = useAppSelector(state => state.vendors);

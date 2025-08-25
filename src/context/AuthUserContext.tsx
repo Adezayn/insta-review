@@ -23,11 +23,11 @@ export const AuthUserProvider = ({ children }: {children: React.ReactNode}) => {
   const auth = useFirebaseAuth();
   const dispatch = useAppDispatch();
   // console.log(auth, "===authuser&loading===",auth.authUser)
-  const {authUser, setAuthUserInfo} = auth;
+  const {authUser} = auth;
 
   const fetchUserInfoMore = async () => {
     if(authUser) {
-      const {user, error} = await getUserDetails(authUser.uid);
+      const {user} = await getUserDetails(authUser.uid);
       if(user){
         const updatedUser = {
           ...user,
