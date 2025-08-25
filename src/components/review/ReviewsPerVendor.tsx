@@ -18,6 +18,7 @@ const ReviewsPerVendor = ({ vendorId }: { vendorId: string }) => {
         const {result} =  await fetchReviewsByVendor(vendorId);
          setReviews(result)
      }catch(err){
+      // @ts-expect-error "the error does not have a defined path"
       setError(err)
      }finally{
       setLoading(false);

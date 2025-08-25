@@ -1,26 +1,26 @@
 "use client"
 // import { Cell, Pie, PieChart, ResponsiveContainer, Sector, SectorProps } from 'recharts';
-import { Cell, Pie, PieChart, Sector, SectorProps } from 'recharts';
+import { Cell, Pie, PieChart } from 'recharts';
 import { FaStar } from "react-icons/fa6";
 import { useAppSelector } from '@/redux/hooks';
 import { Card } from '../ui/card';
 
-type Coordinate = {
-  x: number;
-  y: number;
-};
+// type Coordinate = {
+//   x: number;
+//   y: number;
+// };
 
-type PieSectorData = {
-  percent?: number;
-  name?: string | number;
-  midAngle?: number;
-  middleRadius?: number;
-  tooltipPosition?: Coordinate;
-  value?: number;
-  paddingAngle?: number;
-  dataKey?: string;
-  payload?: any;
-};
+// type PieSectorData = {
+//   percent?: number;
+//   name?: string | number;
+//   midAngle?: number;
+//   middleRadius?: number;
+//   tooltipPosition?: Coordinate;
+//   value?: number;
+//   paddingAngle?: number;
+//   dataKey?: string;
+//   payload?: any;
+// };
 
 // type PieSectorDataItem = React.SVGProps<SVGPathElement> & Partial<SectorProps> & PieSectorData;
 
@@ -88,7 +88,7 @@ const data = [
 //   );
 // };
 
-const RatingBar = ({number, value}) => {
+const RatingBar = ({number, value}:{number: number, value: number}) => {
   console.log(`bg-[${COLORS[number]}] `)
   return (
          <div className='flex items-center mb-1 gap-1'>
@@ -144,7 +144,7 @@ const AveragingRatingBreakdown = () => {
          </PieChart>
          {/* ratings */}
          <div>
-            {Object.entries(ratingsCount).map(([key, value]) => <RatingBar number={key} value ={value} key={key}/>)}
+            {Object.entries(ratingsCount).map(([key, value]) => <RatingBar number={Number(key)} value={value} key={key}/>)}
          </div>
        </div>
      </Card>

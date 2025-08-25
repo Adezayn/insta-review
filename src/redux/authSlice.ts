@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type AuthType = {
-  userId: string | null;
+  userId: string;
   email: string | null;
   name: string | null;
   role: 'user' | 'vendor' | null;
