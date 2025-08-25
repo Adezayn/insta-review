@@ -19,7 +19,7 @@ import { saveUserDetails, signUp } from "@/app/actions/auth";
 import { cn } from "@/lib/utils";
 import LoadingSpinner from "../global/LoadingSpinner";
 // import { redirectToDashboard } from "@/utils/functions";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 // import { AuthUserContext } from "@/context/AuthUserContext";
 // import useAuth from "@/hooks/useAuth";
 
